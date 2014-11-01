@@ -25,14 +25,38 @@
             <EditText android:id="@+id/password" android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:hint="@string/prompt_password"
                 android:imeActionId="@+id/login"
-                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeActionLabel="@string/action_sign_in"
                 android:imeOptions="actionUnspecified" android:inputType="textPassword"
                 android:maxLines="1" android:singleLine="true" />
 
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
             <Button android:id="@+id/email_sign_in_button" style="?android:textAppearanceSmall"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_width="fill_parent" android:layout_height="wrap_content"
                 android:layout_marginTop="16dp" android:text="@string/action_sign_in"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+
+            <Button android:id="@+id/email_register_button" style="?android:textAppearanceSmall"
+                android:layout_width="fill_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" android:text="@string/action_register"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <Button android:id="@+id/facebook_sign_in_button" style="?android:textAppearanceSmall"
+                android:layout_width="fill_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" android:text="@string/action_facebook_sign_in"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:textColor="@color/white"/>
+
+
 
         </LinearLayout>
     </ScrollView>
