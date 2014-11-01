@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">stuffly</string>
+    <string name="placeholder">PlaceHolder</string>
 </resources>
