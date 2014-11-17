@@ -8,5 +8,10 @@
         <item>On-campus</item>
         <item>Off-campus</item>
     </string-array>
+    <string-array name="my_items_array">
+        <item>My Items</item>
+        <item>My Bids</item>
+    </string-array>
+
 
 </resources>

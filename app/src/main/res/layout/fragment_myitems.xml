@@ -9,4 +9,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="THESE ARE YOUR ITEMS"
         android:id="@+id/textView" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/myItemSpinner" />
 </LinearLayout>
