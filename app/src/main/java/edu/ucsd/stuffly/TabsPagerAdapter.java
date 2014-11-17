@@ -3,6 +3,7 @@ package edu.ucsd.stuffly;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 /**
  * Created by ryanliao on 10/31/14.
@@ -35,7 +36,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter
     @Override
     public int getCount()
     {
-        return 3;
+        return 4;
     }
 
 }

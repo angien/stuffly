@@ -1,4 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">stuffly</string>
     <string name="placeholder">PlaceHolder</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="locations_array">
+        <item>On-campus</item>
+        <item>Off-campus</item>
+    </string-array>
+
 </resources>
