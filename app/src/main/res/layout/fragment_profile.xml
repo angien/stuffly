@@ -6,15 +6,15 @@
     android:id="@+id/profile">
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
         android:id="@+id/imageButton"
         android:src="@drawable/man"
         android:layout_gravity="center_horizontal" />
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:inputType="textPersonName"
         android:text="Name"
         android:ems="10"
@@ -22,7 +22,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/editPassword"
@@ -30,7 +30,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/editEmail"
@@ -38,15 +38,16 @@
 
     <Spinner
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:id="@+id/locationSpinner"
         android:spinnerMode="dropdown"
         android:focusable="false" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save Changes"
         android:id="@+id/saveChangeButton"
-        android:layout_gravity="center_horizontal|bottom" />
+        android:layout_gravity="center_horizontal|bottom"
+        android:background="@null" />
 </LinearLayout>
