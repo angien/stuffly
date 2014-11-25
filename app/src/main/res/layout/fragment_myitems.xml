@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="THESE ARE YOUR ITEMS"
+        android:text="My Stuff"
         android:id="@+id/textView" />
 
     <Spinner
