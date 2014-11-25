@@ -89,6 +89,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
                 attemptLogin();
             }
         });
+        mEmailSignInButton.setBackgroundResource(R.drawable.button_color);
 
         Button mEmailRegisterButton = (Button) findViewById(R.id.email_register_button);
         mEmailRegisterButton.setOnClickListener(new OnClickListener() {
@@ -97,6 +98,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
                 attemptRegister();
             }
         });
+        mEmailRegisterButton.setBackgroundResource(R.drawable.button_color);
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
