@@ -2,12 +2,17 @@ package edu.ucsd.stuffly;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.net.URL;
 import java.util.ArrayList;
 
 import edu.ucsd.stuffly.R;
@@ -39,12 +44,24 @@ public class FeedFragment extends Fragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState)
     {
-        super.onActivityCreated(savedInstanceState);
+        RetrieveFeedTask rtask = new RetrieveFeedTask();
+        try{
+            URL url = new URL("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/");
+            rtask.execute(url);
+            JSONArray feed = new JSONArray(rtask.get());
 
-        for(int i = 0; i < 10; i++)
-        {
-            text1[i] = "text1: " + Integer.toString(i);
-            text2[i] = "text2: " + Integer.toString(i);
+            for(int i = 0; i < 10; i++)
+            {
+                text1[i] = feed.getJSONObject(0).getString("firstname") + " " + i;
+                text2[i] = feed.getJSONObject(0).getString("lastname") + " " + i;
+                Log.i("STUFFFFFF url", text1[i]);
+                //text1[i] = "text1: " + Integer.toString(i);
+                //text2[i] = "text2: " + Integer.toString(i);
+            }
+
+
+        }catch(Exception e){
+            Log.e("fucking url", "god damn it");
         }
 
 
@@ -52,6 +69,10 @@ public class FeedFragment extends Fragment
         listview_feed = (ListView) getActivity().findViewById(R.id.listview_feed);
         arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2);
         listview_feed.setAdapter(arrayAdapter);
+
+        super.onActivityCreated(savedInstanceState);
+
+
 
 
 
