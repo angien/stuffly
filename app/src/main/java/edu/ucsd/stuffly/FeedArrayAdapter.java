@@ -58,10 +58,10 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
         //int imageId = getContext().getResources().getDrawable(R.id.app_logo);
 
         TextView feed_textview1 = (TextView) rowView.findViewById(R.id.feed_textview1);
-        feed_textview1.setText(text1);
+        feed_textview1.setText(this.feed_textview1_text[position]);
 
         TextView feed_textview2 = (TextView) rowView.findViewById(R.id.feed_textview2);
-        feed_textview2.setText(text2);
+        feed_textview2.setText(this.feed_textview2_text[position]);
 
         ImageView feed_imageview = (ImageView) rowView.findViewById(R.id.feed_imageview);
         feed_imageview.setImageResource(R.drawable.app_logo);

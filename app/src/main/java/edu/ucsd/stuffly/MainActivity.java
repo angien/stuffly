@@ -2,13 +2,20 @@ package edu.ucsd.stuffly;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.WindowManager;
+import android.widget.PopupWindow;
 
 import edu.ucsd.stuffly.R;
 
@@ -92,5 +99,20 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.createPost:
+                LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                PopupWindow pw = new PopupWindow(inflater.inflate(R.layout.create_post_popup,null,false), WindowManager.LayoutParams.WRAP_CONTENT,WindowManager.LayoutParams.WRAP_CONTENT,true);
+                pw.showAtLocation(viewPager, Gravity.CENTER,0,0);
+                return true;
+            case R.id.refresh:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
