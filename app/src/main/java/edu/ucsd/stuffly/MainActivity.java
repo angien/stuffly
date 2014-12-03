@@ -3,6 +3,7 @@ package edu.ucsd.stuffly;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -14,7 +15,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.PopupWindow;
 
 import edu.ucsd.stuffly.R;
@@ -101,12 +104,18 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         return true;
     }
 
+    PopupWindow pw;
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.createPost:
                 LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                PopupWindow pw = new PopupWindow(inflater.inflate(R.layout.create_post_popup,null,false), WindowManager.LayoutParams.WRAP_CONTENT,WindowManager.LayoutParams.WRAP_CONTENT,true);
+                View layout = inflater.inflate(R.layout.create_post_popup,null,false);
+                pw = new PopupWindow(layout, WindowManager.LayoutParams.WRAP_CONTENT,WindowManager.LayoutParams.WRAP_CONTENT,true);
+
+                Button cancelButton = (Button)layout.findViewById(R.id.cancelButton);
+                cancelButton.setOnClickListener(cancel_create_post_listener);
+
                 pw.showAtLocation(viewPager, Gravity.CENTER,0,0);
                 return true;
             case R.id.refresh:
@@ -115,4 +124,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private View.OnClickListener cancel_create_post_listener = new View.OnClickListener(){
+        public void onClick(View v){
+            pw.dismiss();
+        }
+    };
 }
