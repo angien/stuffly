@@ -33,7 +33,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
-    private FrameLayout fl;
+    private DialogFragment df;
     // Tab titles
     private String[] tabs = { "Feed", "Messages", "My Items", "Profile" };
 
@@ -112,15 +112,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         return true;
     }
 
-    PopupWindow pw;
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.createPost:
-                LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View layout = inflater.inflate(R.layout.create_post_popup,null,false);
-
-                DialogFragment df = new CreatePostFragment();
+                df = new CreatePostFragment();
                 df.show(getSupportFragmentManager(), "createPost");
 
                 return true;
