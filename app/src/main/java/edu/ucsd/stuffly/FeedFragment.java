@@ -45,7 +45,6 @@ public class FeedFragment extends Fragment
     public void onActivityCreated(Bundle savedInstanceState)
     {
         RetrieveFeedTask rtaskget = new RetrieveFeedTask();
-        RetrieveFeedTask rtaskpost = new RetrieveFeedTask();
         try{
             rtaskget.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","GET");
             JSONArray feed = new JSONArray(rtaskget.get());
@@ -63,15 +62,6 @@ public class FeedFragment extends Fragment
         }catch(Exception e){
             Log.e("FeedFragment GET", "treat yo self");
         }
-
-
-        // register new user
-        try{
-            rtaskpost.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","POST","{'password':'HAHa','email':'HAHa','lastname':'HA','firstname':'HAR'}");
-        } catch(Exception e){
-            Log.e("FeedFragment POST", e.toString());
-        }
-
 
 
         feed_list = new ArrayList<String>();

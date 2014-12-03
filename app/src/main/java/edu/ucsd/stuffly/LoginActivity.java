@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -89,6 +90,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
             public void onClick(View view)
             {
                 attemptLogin();
+                //my_request.login(mEmailView.getText().toString(), mPasswordView.getText().toString());
             }
         });
         mEmailSignInButton.setBackgroundResource(R.drawable.button_color);
@@ -97,7 +99,18 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         mEmailRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptRegister();
+                //attemptRegister();
+                RetrieveFeedTask rtaskpost = new RetrieveFeedTask();
+                try{
+                    String reg = "{'password':'" + mEmailView.getText().toString() + "', email:'" + mPasswordView.getText().toString()+ "'}";
+                    rtaskpost.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","POST", reg);
+                    String ret = rtaskpost.get();
+                    if(ret.equals("true")){
+                        Log.i("for angie", "angie");
+                    }
+                } catch(Exception e){
+                    Log.e("FeedFragment POST", e.toString());
+                }
             }
         });
         mEmailRegisterButton.setBackgroundResource(R.drawable.button_color);
@@ -169,7 +182,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            mAuthTask.execute("login");
         }
     }
 
@@ -225,7 +238,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            mAuthTask.execute("register");
         }
     }
 
@@ -349,7 +362,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean>
+    //
+    public class UserLoginTask extends AsyncTask<String, Void, Boolean>
     {
 
         private final String mEmail;
@@ -361,12 +375,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
             mPassword = password;
         }
 
-        protected boolean userLogin(String email, String password){
-            return my_request.login(email, password);
-        }
-
+        // first param in AsyncTask
         @Override
-        protected Boolean doInBackground(Void... params)
+        protected Boolean doInBackground(String... params)
         {
 //            try
 //            {
@@ -389,8 +400,28 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
 //            }
 //
 //            return true;
-            return my_request.login(mEmail, mPassword);
+            if(params[0].equals("login")) {
+                return my_request.login(mEmail, mPassword);
+            }else if(params[0].equals("register")) {
+                // register new user
+                RetrieveFeedTask rtaskpost = new RetrieveFeedTask();
+                try{
+                    rtaskpost.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","POST","{'password':'HAHa','email':'HAHa','lastname':'HA','firstname':'HAR'}");
+                    String ret = rtaskpost.get();
+                    if(ret.equals("true")){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                } catch(Exception e){
+                    Log.e("FeedFragment POST", e.toString());
+                }
+            }else{
+                Log.e("login", "hacked");
+                return false;
+            }
 
+            return false;
         }
 
         @Override
