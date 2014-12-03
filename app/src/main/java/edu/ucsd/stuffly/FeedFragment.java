@@ -50,10 +50,10 @@ public class FeedFragment extends Fragment
             rtaskget.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","GET");
             JSONArray feed = new JSONArray(rtaskget.get());
 
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < feed.length(); i++)
             {
-                text1[i] = feed.getJSONObject(0).getString("firstname") + " " + i;
-                text2[i] = feed.getJSONObject(0).getString("lastname") + " " + i;
+                text1[i] = feed.getJSONObject(i).getString("firstname");
+                text2[i] = feed.getJSONObject(i).getString("lastname");
                 Log.i("STUFFFFFF url", text1[i]);
                 //text1[i] = "text1: " + Integer.toString(i);
                 //text2[i] = "text2: " + Integer.toString(i);
@@ -65,10 +65,10 @@ public class FeedFragment extends Fragment
         }
 
 
-
+        // register new user
         try{
-            rtaskpost.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","POST");
-        }catch(Exception e){
+            rtaskpost.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","POST","{'password':'HAHa','email':'HAHa','lastname':'HA','firstname':'HAR'}");
+        } catch(Exception e){
             Log.e("FeedFragment POST", e.toString());
         }
 
