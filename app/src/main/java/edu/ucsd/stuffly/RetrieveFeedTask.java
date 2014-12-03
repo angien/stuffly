@@ -68,7 +68,6 @@ public class RetrieveFeedTask extends AsyncTask<String, Integer, String> {
             return builder.toString();
         }
         else {
-
          // Create a new HttpClient and Post Header
             Log.i("fuck", "shit");
             HttpClient httpclient = new DefaultHttpClient();
@@ -76,7 +75,7 @@ public class RetrieveFeedTask extends AsyncTask<String, Integer, String> {
 
             try {
                 // Add your data
-                JSONObject obj = new JSONObject("{'password':'HAHa','email':'HAHa','lastname':'HA','firstname':'HAR'}");
+                JSONObject obj = new JSONObject(params[2]);
                 httppost.setEntity(new StringEntity(obj.toString()));
                 httppost.setHeader("Content-type","application/json");
                 Log.i("httppost", httppost.toString());
