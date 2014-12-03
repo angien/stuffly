@@ -46,8 +46,7 @@ public class FeedFragment extends Fragment
     {
         RetrieveFeedTask rtask = new RetrieveFeedTask();
         try{
-            URL url = new URL("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/");
-            rtask.execute(url);
+            rtask.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","GET");
             JSONArray feed = new JSONArray(rtask.get());
 
             for(int i = 0; i < 10; i++)
@@ -58,6 +57,16 @@ public class FeedFragment extends Fragment
                 //text1[i] = "text1: " + Integer.toString(i);
                 //text2[i] = "text2: " + Integer.toString(i);
             }
+
+
+        }catch(Exception e){
+            Log.e("fucking url", "god damn it");
+        }
+
+
+
+        try{
+            rtask.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","POST");
 
 
         }catch(Exception e){

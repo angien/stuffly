@@ -9,6 +9,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+<<<<<<< HEAD
+=======
+            <option value="$PROJECT_DIR$/libraries" />
+            <option value="$PROJECT_DIR$/libraries/facebook" />
+>>>>>>> 273c6a771fdf884a0f72c35c6789adf608cf1f65
           </set>
         </option>
       </GradleProjectSettings>
