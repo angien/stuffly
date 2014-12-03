@@ -25,6 +25,8 @@ public class CreatePostFragment extends DialogFragment {
         builder.setView(view);
 
         final AlertDialog OptionDialog = builder.create();
+        //doesn't work
+        //OptionDialog.setCanceledOnTouchOutside(true);
         Button cancelButton = (Button)view.findViewById(R.id.stuffCancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
