@@ -44,10 +44,11 @@ public class FeedFragment extends Fragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState)
     {
-        RetrieveFeedTask rtask = new RetrieveFeedTask();
+        RetrieveFeedTask rtaskget = new RetrieveFeedTask();
+        RetrieveFeedTask rtaskpost = new RetrieveFeedTask();
         try{
-            rtask.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","GET");
-            JSONArray feed = new JSONArray(rtask.get());
+            rtaskget.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","GET");
+            JSONArray feed = new JSONArray(rtaskget.get());
 
             for(int i = 0; i < 10; i++)
             {
@@ -60,18 +61,17 @@ public class FeedFragment extends Fragment
 
 
         }catch(Exception e){
-            Log.e("fucking url", "god damn it");
+            Log.e("FeedFragment GET", "treat yo self");
         }
 
 
 
         try{
-            rtask.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","POST");
-
-
+            rtaskpost.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","POST");
         }catch(Exception e){
-            Log.e("fucking url", "god damn it");
+            Log.e("FeedFragment POST", e.toString());
         }
+
 
 
         feed_list = new ArrayList<String>();

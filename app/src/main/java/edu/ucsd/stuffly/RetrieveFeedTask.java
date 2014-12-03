@@ -12,8 +12,11 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -66,6 +69,7 @@ public class RetrieveFeedTask extends AsyncTask<String, Integer, String> {
         }
         else {
          // Create a new HttpClient and Post Header
+            Log.i("fuck", "shit");
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(params[0]);
 
@@ -73,16 +77,18 @@ public class RetrieveFeedTask extends AsyncTask<String, Integer, String> {
             // Add your data
                 
 
-                JSONObject obj = new JSONObject('{"_id":"12345","password":"HAHa","email":"HAHa","lastname":"HA","firstname":"HA","__v":0,"posts":[]}');
-                httppost.setEntity(new UrlEncodedFormEntity(obj));
+                JSONObject obj = new JSONObject("{'password':'HAHa','email':'HAHa','lastname':'HA','firstname':'HAR'}");
+                httppost.setEntity(new StringEntity(obj.toString()));
+                httppost.setHeader("Content-type","application/json");
+                Log.i("httppost", httppost.toString());
 
             // Execute HTTP Post Request
                 HttpResponse response = httpclient.execute(httppost);
+                String temp = EntityUtils.toString(response.getEntity());
+                Log.i("RetrieveFeedTask POST", temp);
                 return "true";
-            } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
-            } catch (IOException e) {
-            // TODO Auto-generated catch block
+            } catch (Exception e){
+                Log.e("RetrieveFeedTask POST", e.toString());
             }
             return "false";
         }
