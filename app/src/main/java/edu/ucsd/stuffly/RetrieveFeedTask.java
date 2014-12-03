@@ -71,14 +71,10 @@ public class RetrieveFeedTask extends AsyncTask<String, Integer, String> {
 
             try {
             // Add your data
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-                nameValuePairs.add(new BasicNameValuePair("_id", "12345"));
-                nameValuePairs.add(new BasicNameValuePair("firstname", "AndDev is Cool!"));
-                nameValuePairs.add(new BasicNameValuePair("lastname", "12345"));
-                nameValuePairs.add(new BasicNameValuePair("email", "AndDev is Cool!"));
-                nameValuePairs.add(new BasicNameValuePair("password", "12345"));
-                nameValuePairs.add(new BasicNameValuePair("imageURL", "AndDev is Cool!"));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                
+
+                JSONObject obj = new JSONObject('{"_id":"12345","password":"HAHa","email":"HAHa","lastname":"HA","firstname":"HA","__v":0,"posts":[]}');
+                httppost.setEntity(new UrlEncodedFormEntity(obj));
 
             // Execute HTTP Post Request
                 HttpResponse response = httpclient.execute(httppost);
