@@ -3,7 +3,8 @@ package edu.ucsd.stuffly;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.app.Dialog;
+import android.support.v4.app.DialogFragment;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -15,9 +16,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 
 import edu.ucsd.stuffly.R;
@@ -25,11 +28,12 @@ import edu.ucsd.stuffly.R;
 /**
  * Created by ryanliao on 10/31/14.
  */
-public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
+public class MainActivity extends FragmentActivity implements ActionBar.TabListener{
 
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
+    private FrameLayout fl;
     // Tab titles
     private String[] tabs = { "Feed", "Messages", "My Items", "Profile" };
 
@@ -78,6 +82,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             public void onPageScrollStateChanged(int arg0) {
             }
         });
+
+        //ViewPager can't be cast to FrameLayout
+        //fl = (FrameLayout)findViewById(R.id.pager);
+        //fl.getForeground().setAlpha(0);
     }
 
     @Override
@@ -111,12 +119,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             case R.id.createPost:
                 LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View layout = inflater.inflate(R.layout.create_post_popup,null,false);
-                pw = new PopupWindow(layout, WindowManager.LayoutParams.WRAP_CONTENT,WindowManager.LayoutParams.WRAP_CONTENT,true);
 
-                Button cancelButton = (Button)layout.findViewById(R.id.cancelButton);
-                cancelButton.setOnClickListener(cancel_create_post_listener);
+                DialogFragment df = new CreatePostFragment();
+                df.show(getSupportFragmentManager(), "createPost");
 
-                pw.showAtLocation(viewPager, Gravity.CENTER,0,0);
                 return true;
             case R.id.refresh:
                 return true;
@@ -124,10 +130,4 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    private View.OnClickListener cancel_create_post_listener = new View.OnClickListener(){
-        public void onClick(View v){
-            pw.dismiss();
-        }
-    };
 }

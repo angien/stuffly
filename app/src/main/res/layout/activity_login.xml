@@ -31,7 +31,7 @@
                 android:singleLine="true" />
 
             <EditText android:id="@+id/password" android:layout_width="match_parent"
-                android:layout_height="60dp" android:hint="Name"
+                android:layout_height="60dp" android:hint="Password"
                 android:imeActionId="@+id/login"
                 android:imeActionLabel="@string/action_sign_in"
                 android:imeOptions="actionUnspecified" android:inputType="textPassword"

@@ -20,7 +20,4 @@
     <application/>
     <uses-sdk android:minSdkVersion="9" />
 
-    <meta-data
-        android:com.facebook.sdk.ApplicationId="@strings/facebook_app_id">
-    </meta-data>
 </manifest>
