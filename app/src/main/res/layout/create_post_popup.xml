@@ -73,7 +73,8 @@
         android:layout_height="60dp"
         android:id="@+id/imageButton"
         android:layout_gravity="center_horizontal"
-        android:src="@android:drawable/ic_menu_camera" />
+        android:src="@android:drawable/ic_menu_camera"
+        android:background="@drawable/button_color" />
 
     <Button
         android:layout_width="match_parent"
