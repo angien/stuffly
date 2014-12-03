@@ -26,6 +26,10 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <meta-data
+            android:com.facebook.sdk.ApplicationId="@strings/facebook_app_id">
+        </meta-data>
+
     </application>
 
 </manifest>
