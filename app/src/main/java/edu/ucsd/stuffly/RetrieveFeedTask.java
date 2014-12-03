@@ -68,21 +68,20 @@ public class RetrieveFeedTask extends AsyncTask<String, Integer, String> {
             return builder.toString();
         }
         else {
+
          // Create a new HttpClient and Post Header
             Log.i("fuck", "shit");
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(params[0]);
 
             try {
-            // Add your data
-                
-
+                // Add your data
                 JSONObject obj = new JSONObject("{'password':'HAHa','email':'HAHa','lastname':'HA','firstname':'HAR'}");
                 httppost.setEntity(new StringEntity(obj.toString()));
                 httppost.setHeader("Content-type","application/json");
                 Log.i("httppost", httppost.toString());
 
-            // Execute HTTP Post Request
+                // Execute HTTP Post Request
                 HttpResponse response = httpclient.execute(httppost);
                 String temp = EntityUtils.toString(response.getEntity());
                 Log.i("RetrieveFeedTask POST", temp);
@@ -93,7 +92,7 @@ public class RetrieveFeedTask extends AsyncTask<String, Integer, String> {
             return "false";
         }
 
-        
+
 
     }
 
