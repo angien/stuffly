@@ -6,9 +6,5 @@
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
-  <component name="SvnConfiguration" myUseAcceleration="nothing">
-    <configuration useDefault="false">$USER_HOME$/.subversion</configuration>
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="false" />
-  </component>
 </project>
 
