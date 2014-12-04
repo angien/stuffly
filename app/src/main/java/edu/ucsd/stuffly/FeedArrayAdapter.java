@@ -1,9 +1,11 @@
 package edu.ucsd.stuffly;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Color;
 import android.media.Image;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,16 +57,33 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
             @Override
             public void onClick(View v) {
                 Context context = getContext();
-                CharSequence text;
+                View root = ((Activity)context).getWindow().getDecorView().findViewById(android.R.id.content);
+                String text;
+                String title = "";
+                String description = "";
+                int price = 0;
+                boolean obo = false;
+
                 try {
                     Log.e("GET VIEW ID USER", UserID.id);
                     if ((UserID.id).equals(feed_json[position].getString("user")))
                         text = "MATCHES!!!";
-                    else
+                    else {
                         text = feed_json[position].toString();
+                        title = feed_json[position].getString("title");
+                        description = feed_json[position].getString("description");
+                        price = feed_json[position].getInt("price");
+                        obo = feed_json[position].getBoolean("obo");
+
+                        ItemDetailFragment idf = new ItemDetailFragment();
+
+                        idf.setContent(title,description, price,obo);
+//
+                        idf.show(((FragmentActivity) context).getSupportFragmentManager(), "itemDetail" + position);
+                    }
                 }
                 catch (Exception e) {
-                    text = "SOMETHING WRONG?";
+                    text = e.toString();
                 }
                 int duration = Toast.LENGTH_SHORT;
 
@@ -73,15 +92,6 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
             }
         });
 
-        if(position % 2 == 1)
-        {
-            //LinearLayout bg = (LinearLayout) rowView.findViewById(R.id.cell_feed_linearlayout);
-            //bg.setBackgroundColor(Color.parseColor("#e7e7e8")); // move this to @color later
-
-        }
-
-        String text1 = "text1 placeholder";
-        String text2 = "text2 placeholder";
         //int imageId = getContext().getResources().getDrawable(R.id.app_logo);
 
         TextView feed_textview1 = (TextView) rowView.findViewById(R.id.feed_cell_title);

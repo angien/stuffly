@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -73,11 +74,8 @@ public class FeedFragment extends Fragment
         arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, json);
         listview_feed.setAdapter(arrayAdapter);
 
+
         super.onActivityCreated(savedInstanceState);
-
-
-
-
 
 //        // allow action when clicking on listview's cell
 //        listview_feed.setOnItemClickListener(new AdapterView.OnItemClickListener()

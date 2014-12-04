@@ -37,8 +37,6 @@ public class MyItemsFragment extends Fragment
                              Bundle savedInstanceState) {
 
 
-
-
         View rootView = inflater.inflate(R.layout.fragment_myitems, container, false);
         text1 = new String[10];
         text2 = new String[10];
@@ -56,16 +54,7 @@ public class MyItemsFragment extends Fragment
         spinner.setAdapter(adapter);
 
         return rootView;
-
-
-
     }
-
-
-
-
-
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState)
