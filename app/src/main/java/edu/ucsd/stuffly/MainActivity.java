@@ -23,6 +23,10 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.StandardExceptionParser;
+
 import edu.ucsd.stuffly.R;
 
 /**
@@ -43,7 +47,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initilization
+        // Initialization
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
@@ -125,5 +129,19 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        EasyTracker.getInstance(this).activityStart(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        EasyTracker.getInstance(this).activityStop(this);
     }
 }
