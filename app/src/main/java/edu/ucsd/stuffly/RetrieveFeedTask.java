@@ -12,10 +12,12 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -68,7 +70,7 @@ public class RetrieveFeedTask extends AsyncTask<String, Integer, String> {
             }
             return builder.toString();
         }
-        else { // A POST
+        else if(params[1].equals("POST")){ // A POST
          // Create a new HttpClient and Post Header
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(serverURL);
@@ -88,9 +90,48 @@ public class RetrieveFeedTask extends AsyncTask<String, Integer, String> {
             } catch (Exception e){
                 Log.e("RetrieveFeedTask POST", e.toString());
             }
-            return "false";
         }
+        else{//PUT
+            // Create a new HttpClient and Post Header
 
+            HttpClient httpclient = new DefaultHttpClient();
+            StringBuilder builder = new StringBuilder();
+            HttpPut httpPut = new HttpPut(serverURL);
+            try{
+                JSONObject obj = new JSONObject(params[2]);
+                httpPut.setEntity(new StringEntity(obj.toString()));
+                httpPut.setHeader("Content-type","application/json");
+                Log.i("httpput", httpPut.toString());
+
+                HttpResponse response = httpclient.execute(httpPut);
+                StatusLine statusLine = response.getStatusLine();
+                int statusCode = statusLine.getStatusCode();
+                if(statusCode == 200){
+                    HttpEntity entity = response.getEntity();
+                    InputStream content = entity.getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+                    String line;
+                    while((line = reader.readLine()) != null){
+                        builder.append(line);
+                    }
+                } else {
+                    Log.e(MainActivity.class.toString(), "Failed to PUT JSON object");
+                }
+            }catch(ClientProtocolException e){
+                e.printStackTrace();
+            } catch (IOException e){
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return builder.toString();
+
+
+
+
+
+        }
+        return "false";
 
 
     }

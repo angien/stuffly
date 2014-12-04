@@ -5,13 +5,16 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Button;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.ucsd.stuffly.R;
@@ -31,27 +34,35 @@ public class ProfileFragment extends Fragment
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
-        TextView nameField = (TextView) rootView.findViewById(R.id.profile_name);
-        TextView emailField = (TextView) rootView.findViewById(R.id.profile_email);
-        TextView passwordField = (TextView) rootView.findViewById(R.id.profile_password);
+        final TextView firstnameField = (TextView) rootView.findViewById(R.id.profile_first_name);
+        final TextView lastnameField = (TextView) rootView.findViewById(R.id.profile_last_name);
+        final TextView emailField = (TextView) rootView.findViewById(R.id.profile_email);
+        final TextView passwordField = (TextView) rootView.findViewById(R.id.profile_password);
         RetrieveFeedTask rtaskget = new RetrieveFeedTask();
         String id = UserID.id;
         try{
             //rtaskget.execute("/api/user/" + id,"GET");
             JSONObject userInfo = new JSONObject(rtaskget.execute("/api/user/" + id,"GET").get());
-            firstName = userInfo.getString("firstname");
-            lastName = userInfo.getString("lastname");
+            Log.e("The returned string for profiel", userInfo.toString());
+
             email = userInfo.getString("email");
             password = userInfo.getString("password");
+            firstName = userInfo.getString("firstname");
+            lastName = userInfo.getString("lastname");
             //Log.i("STUFFFFFF url", "wat" + feed.get(i));
 
-        }catch(Exception e){
-            Log.e("FeedFragment GET", "treat yo self");
         }
-        nameField.setText(firstName+ " " +lastName);
+        catch (JSONException e) {
+            firstName = "";
+            lastName = "";
+        }
+        catch(Exception e){
+            Log.e("FeedFragment GET", e.toString());
+        }
+        firstnameField.setText(firstName);
+        lastnameField.setText(lastName);
         emailField.setText(email);
         passwordField.setText(password);
-
 
         //on-campus or off-campus
         Spinner spinner = (Spinner) rootView.findViewById(R.id.profile_location_spinner);
@@ -59,6 +70,24 @@ public class ProfileFragment extends Fragment
                 R.array.locations_array, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+
+        //save changes
+        Button saveButton = (Button) rootView.findViewById(R.id.profile_save_button);
+        saveButton.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                try{
+                    String ret = new RetrieveFeedTask().execute("/api/user/" + UserID.id, "PUT",
+                            "{'password':'" + passwordField.getText().toString() + "', 'email':'" + emailField.getText().toString() + "','lastname':'" + lastnameField.getText().toString() + "', 'firstname':'" + firstnameField.getText().toString() +"'}").get();
+                    Log.e("AN UPDATE WAS MADE PUT", ret);
+                } catch(Exception e){
+                    Log.e("ProfileFragment PUT", e.toString());
+                }
+            }
+        });
 
         return rootView;
     }
