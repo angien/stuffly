@@ -28,8 +28,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import edu.ucsd.stuffly.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -172,6 +170,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
+            new UserID(email);
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute("login");

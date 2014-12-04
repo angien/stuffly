@@ -28,6 +28,7 @@ public class FeedFragment extends Fragment
 
     private String[] text1;
     private String[] text2;
+    private JSONObject[] json;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -36,6 +37,7 @@ public class FeedFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_feed, container, false);
         text1 = new String[10];
         text2 = new String[10];
+        json = new JSONObject[10];
 
 
         return rootView;
@@ -53,6 +55,8 @@ public class FeedFragment extends Fragment
             {
                 text1[i] = feed.getJSONObject(i).getString("title");
                 text2[i] = feed.getJSONObject(i).getString("description");
+                json[i] = feed.getJSONObject(i);
+
                 Log.i("STUFFFFFF url", text1[i]);
                 //text1[i] = "text1: " + Integer.toString(i);
                 //text2[i] = "text2: " + Integer.toString(i);
@@ -66,7 +70,7 @@ public class FeedFragment extends Fragment
 
         feed_list = new ArrayList<String>();
         listview_feed = (ListView) getActivity().findViewById(R.id.listview_feed);
-        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2);
+        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, json);
         listview_feed.setAdapter(arrayAdapter);
 
         super.onActivityCreated(savedInstanceState);
