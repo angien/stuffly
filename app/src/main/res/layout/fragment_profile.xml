@@ -8,7 +8,7 @@
     <ImageButton
         android:layout_width="fill_parent"
         android:layout_height="200dp"
-        android:id="@+id/imageButton"
+        android:id="@+id/profile_pic"
         android:src="@drawable/man"
         android:layout_gravity="center_horizontal" />
 
@@ -18,14 +18,14 @@
         android:inputType="textPersonName"
         android:text="Name"
         android:ems="10"
-        android:id="@+id/editName" />
+        android:id="@+id/profile_name" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editPassword"
+        android:id="@+id/profile_password"
         android:text="password" />
 
     <EditText
@@ -33,13 +33,13 @@
         android:layout_height="50dp"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editEmail"
+        android:id="@+id/profile_email"
         android:text="test@test.com" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/locationSpinner"
+        android:id="@+id/profile_location_spinner"
         android:spinnerMode="dropdown"
         android:focusable="false" />
 
@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save Changes"
-        android:id="@+id/saveChangeButton"
+        android:id="@+id/profile_save_button"
         android:layout_gravity="center_horizontal|bottom"
         android:background="@drawable/button_color" />
 </LinearLayout>
