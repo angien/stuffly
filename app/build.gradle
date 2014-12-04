@@ -26,5 +26,4 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.0'
     compile project(':libraries:facebook')
     compile files('libraries/libGoogleAnalyticsServices.jar')
-    compile files('C:/Users/Andrew/Documents/UCSD/Classes/CSE 190/stuffly/libraries/libGoogleAnalyticsServices.jar')
 }
