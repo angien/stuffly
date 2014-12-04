@@ -46,13 +46,13 @@ public class FeedFragment extends Fragment
     {
         RetrieveFeedTask rtaskget = new RetrieveFeedTask();
         try{
-            rtaskget.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","GET");
+            rtaskget.execute("/api/post/","GET");
             JSONArray feed = new JSONArray(rtaskget.get());
 
             for(int i = 0; i < feed.length(); i++)
             {
-                text1[i] = feed.getJSONObject(i).getString("firstname");
-                text2[i] = feed.getJSONObject(i).getString("lastname");
+                text1[i] = feed.getJSONObject(i).getString("title");
+                text2[i] = feed.getJSONObject(i).getString("description");
                 Log.i("STUFFFFFF url", text1[i]);
                 //text1[i] = "text1: " + Integer.toString(i);
                 //text2[i] = "text2: " + Integer.toString(i);

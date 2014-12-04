@@ -40,11 +40,12 @@ public class RetrieveFeedTask extends AsyncTask<String, Integer, String> {
 //            if (isCancelled()) break;
 //        }
 //        return totalSize;
+        String serverURL = "http://test-master-env-ecmnn89sfm.elasticbeanstalk.com" + params[0];
 
-        if (params[1].equals("GET")) {
+        if (params[1].equals("GET")) { // A GET
             StringBuilder builder = new StringBuilder();
             HttpClient client = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet(params[0]);
+            HttpGet httpGet = new HttpGet(serverURL);
             try{
                 HttpResponse response = client.execute(httpGet);
                 StatusLine statusLine = response.getStatusLine();
@@ -67,11 +68,10 @@ public class RetrieveFeedTask extends AsyncTask<String, Integer, String> {
             }
             return builder.toString();
         }
-        else {
+        else { // A POST
          // Create a new HttpClient and Post Header
-            Log.i("fuck", "shit");
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost(params[0]);
+            HttpPost httppost = new HttpPost(serverURL);
 
             try {
                 // Add your data
@@ -82,9 +82,9 @@ public class RetrieveFeedTask extends AsyncTask<String, Integer, String> {
 
                 // Execute HTTP Post Request
                 HttpResponse response = httpclient.execute(httppost);
-                String temp = EntityUtils.toString(response.getEntity());
-                Log.i("RetrieveFeedTask POST", temp);
-                return "true";
+                int temp = response.getStatusLine().getStatusCode();
+                Log.i("RetrieveFeedTask POST", ""+temp);
+                if (temp == 200) return "true";
             } catch (Exception e){
                 Log.e("RetrieveFeedTask POST", e.toString());
             }

@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -25,6 +26,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import edu.ucsd.stuffly.R;
 
@@ -99,18 +101,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         mEmailRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //attemptRegister();
-                RetrieveFeedTask rtaskpost = new RetrieveFeedTask();
-                try{
-                    String reg = "{'password':'" + mEmailView.getText().toString() + "', email:'" + mPasswordView.getText().toString()+ "'}";
-                    rtaskpost.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","POST", reg);
-                    String ret = rtaskpost.get();
-                    if(ret.equals("true")){
-                        Log.i("for angie", "angie");
-                    }
-                } catch(Exception e){
-                    Log.e("FeedFragment POST", e.toString());
-                }
+                attemptRegister();
+
             }
         });
         mEmailRegisterButton.setBackgroundResource(R.drawable.button_color);
@@ -236,9 +228,36 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute("register");
+            RetrieveFeedTask rtaskpost = new RetrieveFeedTask();
+            try{
+                String reg = "{'email':'" + mEmailView.getText().toString() + "', password:'" + mPasswordView.getText().toString()+ "'}";
+                rtaskpost.execute("/api/user/", "POST", reg);
+                String ret = rtaskpost.get();
+                if(ret.equals("false")){
+                    Log.i("for angie", "angie");
+                    Context context = getApplicationContext();
+                    CharSequence text = "Registration failed";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+                else {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Registration was successful";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            } catch(Exception e){
+                Log.e("FeedFragment POST", e.toString());
+            }
+
+
+            //showProgress(true);
+            //mAuthTask = new UserLoginTask(email, password);
+            //mAuthTask.execute("register");
         }
     }
 

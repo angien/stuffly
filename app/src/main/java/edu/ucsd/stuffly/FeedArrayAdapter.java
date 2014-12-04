@@ -57,11 +57,11 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
         String text2 = "text2 placeholder";
         //int imageId = getContext().getResources().getDrawable(R.id.app_logo);
 
-        //TextView feed_textview1 = (TextView) rowView.findViewById(R.id.feed_textview1);
-        //feed_textview1.setText(this.feed_textview1_text[position]);
+        TextView feed_textview1 = (TextView) rowView.findViewById(R.id.feed_cell_title);
+        feed_textview1.setText(this.feed_textview1_text[position]);
 
-        //TextView feed_textview2 = (TextView) rowView.findViewById(R.id.feed_textview2);
-        //feed_textview2.setText(this.feed_textview2_text[position]);
+        TextView feed_textview2 = (TextView) rowView.findViewById(R.id.feed_cell_description);
+        feed_textview2.setText(this.feed_textview2_text[position]);
 
         //ImageView feed_imageview = (ImageView) rowView.findViewById(R.id.feed_imageview);
         //feed_imageview.setImageResource(R.drawable.app_logo);
