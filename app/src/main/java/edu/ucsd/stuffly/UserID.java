@@ -7,7 +7,7 @@ public class UserID {
 
     public static String id = "";
 
-    public UserID(String email) {
+    public UserID(String id) {
         this.id = id;
     }
 
