@@ -23,7 +23,7 @@ public class ProfileFragment extends Fragment
 
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        Spinner spinner = (Spinner) rootView.findViewById(R.id.locationSpinner);
+        Spinner spinner = (Spinner) rootView.findViewById(R.id.profile_location_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getBaseContext(),
                 R.array.locations_array, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

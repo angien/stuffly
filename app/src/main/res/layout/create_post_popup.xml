@@ -59,8 +59,7 @@
             android:id="@+id/stuff_obo"
             android:checked="false"
             android:textSize="24dp"
-            android:clickable="true"
-            android:showText="false"/>
+            android:clickable="true"/>
 
     </LinearLayout>
 
