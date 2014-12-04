@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="325dp"
+    android:layout_height="match_parent" android:layout_gravity="center_horizontal"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="Title"
+        android:id="@+id/item_detail_title"
+        android:textSize="45dp"
+        android:gravity="bottom" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:id="@+id/item_detail_pic" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="125dp"
+        android:text="Description"
+        android:id="@+id/item_detail_description"
+        android:textSize="16dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="$0.00"
+            android:id="@+id/item_detail_price"
+            android:textSize="30dp"
+            android:gravity="right" />
+
+        <CheckBox
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="OBO"
+            android:id="@+id/item_detail_obo"
+            android:checked="false"
+            android:textSize="24dp"
+            android:layout_marginLeft="50dp"
+            android:enabled="true"
+            android:clickable="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:text="Message"
+            android:id="@+id/item_detail_message_button"
+            android:background="@drawable/button_color"/>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:text="Offer"
+            android:id="@+id/item_detail_offer_button"
+            android:background="@drawable/button_color"/>
+    </LinearLayout>
+
+</LinearLayout>

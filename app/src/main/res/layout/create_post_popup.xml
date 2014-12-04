@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:ems="10"
-        android:id="@+id/stuffTitle"
+        android:id="@+id/stuff_title"
         android:hint="Title"
         android:inputType="text" />
 
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/stuffDescription"
+        android:id="@+id/stuff_description"
         android:hint="Description"
         android:minHeight="120dp"
         android:gravity="bottom" />
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="42dp"
             android:text="$"
-            android:id="@+id/dollarSign"
+            android:id="@+id/stuff_dollar_sign"
             android:textSize="24dp" />
 
         <EditText
@@ -46,33 +46,36 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/stuffPrice"
+            android:id="@+id/stuff_price"
             android:layout_weight="1"
             android:text="0.00"
             android:gravity="right"
             android:textSize="24dp" />
 
-        <CheckBox
+        <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="OBO"
-            android:id="@+id/checkOBO"
+            android:id="@+id/stuff_obo"
             android:checked="false"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            android:clickable="true"
+            android:showText="false"/>
+
     </LinearLayout>
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="No Image Preview"
-        android:id="@+id/stuffPic"
+        android:id="@+id/stuff_pic"
         android:minHeight="60dp"
         android:gravity="center_vertical|center_horizontal" />
 
     <ImageButton
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:id="@+id/stuffPicButton"
+        android:id="@+id/stuff_pic_button"
         android:layout_gravity="center_horizontal"
         android:src="@android:drawable/ic_menu_camera"
         android:background="@drawable/button_color" />
@@ -81,7 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Stuff It"
-        android:id="@+id/stuffItButton"
+        android:id="@+id/stuff_it_button"
         android:layout_marginTop="16dp"
         android:textStyle="bold"
         android:background="@drawable/button_color"
@@ -91,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cancel"
-        android:id="@+id/stuffCancelButton"
+        android:id="@+id/stuff_cancel_button"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/button_color"
         android:textSize="16dp"/>/>
