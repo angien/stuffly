@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="325dp"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
     android:padding="10dp"
-    android:id="@+id/item_detail_linear_layout">
+    android:id="@+id/item_detail_linear_layout_editable">
 
-    <TextView
+    <EditText
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:text="Title"
-        android:id="@+id/item_detail_title"
-        android:textSize="45dp"
+        android:id="@+id/item_detail_title_editable"
+        android:textSize="35dp"
         android:gravity="bottom"/>
 
-    <ImageView
+    <ImageButton
         android:layout_width="fill_parent"
         android:layout_height="200dp"
-        android:id="@+id/item_detail_pic" />
+        android:id="@+id/item_detail_pic_editable" />
 
-    <TextView
+    <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Description"
-        android:id="@+id/item_detail_description"
+        android:id="@+id/item_detail_description_editable"
         android:textSize="16dp"
         android:maxHeight="120dp"
         android:layout_marginTop="10dp"
@@ -37,39 +37,39 @@
         android:gravity="center_horizontal"
         android:layout_marginTop="10dp">
 
-        <TextView
+        <EditText
             android:layout_width="150dp"
             android:layout_height="35dp"
             android:text="$0.00"
-            android:id="@+id/item_detail_price"
-            android:textSize="30dp"
+            android:id="@+id/item_detail_price_editable"
+            android:textSize="20dp"
             android:gravity="center_vertical|right" />
 
         <CheckBox
             android:layout_width="85dp"
             android:layout_height="35dp"
             android:text="OBO"
-            android:id="@+id/item_detail_obo"
+            android:id="@+id/item_detail_obo_editable"
             android:checked="false"
             android:textSize="24dp"
             android:enabled="true"
-            android:clickable="false"
+            android:clickable="true"
             android:layout_marginLeft="50dp"
             android:gravity="center_vertical" />
 
     </LinearLayout>
 
-        <TextView
-            android:layout_width="130dp"
-            android:layout_height="32dp"
-            android:text="Off-Campus"
-            android:id="@+id/item_detail_location"
-            android:textSize="24dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:padding="1dp"/>
+    <Spinner
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:id="@+id/item_detail_location_editable"
+        android:textSize="24dp"
+        android:layout_marginTop="10dp"
+        android:spinnerMode="dropdown"
+        android:focusable="false"
+        android:layout_gravity="center_horizontal"/>
 
-        <LinearLayout
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -79,18 +79,18 @@
         <Button
             android:layout_width="100dp"
             android:layout_height="60dp"
-            android:text="Message"
-            android:id="@+id/item_detail_message_button"
+            android:text="Save"
+            android:id="@+id/item_detail_editable_save_button"
             android:background="@drawable/button_color"
             android:layout_marginRight="5dp" />
 
         <Button
             android:layout_width="100dp"
             android:layout_height="60dp"
-            android:text="Offer"
-            android:id="@+id/item_detail_offer_button"
+            android:text="Delete"
+            android:id="@+id/item_detail_editable_delete_button"
             android:background="@drawable/button_color"
             android:layout_marginLeft="5dp" />
-        </LinearLayout>
-
     </LinearLayout>
+
+</LinearLayout>

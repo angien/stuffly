@@ -63,24 +63,29 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
                 String description = "";
                 int price = 0;
                 boolean obo = false;
+                String location = "";
 
                 try {
                     Log.e("GET VIEW ID USER", UserID.id);
-                    if ((UserID.id).equals(feed_json[position].getString("user")))
+                    text = feed_json[position].toString();
+                    title = feed_json[position].getString("title");
+                    description = feed_json[position].getString("description");
+                    price = feed_json[position].getInt("price");
+                    obo = feed_json[position].getBoolean("obo");
+                    location = feed_json[position].getString("location");
+
+                    ItemDetailFragment idf = new ItemDetailFragment();
+
+                    idf.setContent(title,description, price,obo,location);
+
+                    if ((UserID.id).equals(feed_json[position].getString("user"))) {
                         text = "MATCHES!!!";
-                    else {
-                        text = feed_json[position].toString();
-                        title = feed_json[position].getString("title");
-                        description = feed_json[position].getString("description");
-                        price = feed_json[position].getInt("price");
-                        obo = feed_json[position].getBoolean("obo");
-
-                        ItemDetailFragment idf = new ItemDetailFragment();
-
-                        idf.setContent(title,description, price,obo);
-//
-                        idf.show(((FragmentActivity) context).getSupportFragmentManager(), "itemDetail" + position);
+                        idf.setSelf(true);
                     }
+                    else {
+                        idf.setSelf(false);
+                    }
+                    idf.show(((FragmentActivity) context).getSupportFragmentManager(), "itemDetail" + position);
                 }
                 catch (Exception e) {
                     text = e.toString();
