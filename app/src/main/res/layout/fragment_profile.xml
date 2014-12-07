@@ -14,7 +14,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:inputType="textPersonName"
         android:text="First Name"
         android:ems="10"
@@ -22,7 +22,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:inputType="textPersonName"
         android:text="Last Name"
         android:ems="10"
@@ -30,7 +30,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/profile_password"
@@ -38,7 +38,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/profile_email"
@@ -46,7 +46,7 @@
 
     <Spinner
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:id="@+id/profile_location_spinner"
         android:spinnerMode="dropdown"
         android:focusable="false" />
