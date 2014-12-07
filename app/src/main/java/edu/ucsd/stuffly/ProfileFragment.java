@@ -34,7 +34,7 @@ public class ProfileFragment extends Fragment
         final TextView lastnameField = (TextView) rootView.findViewById(R.id.profile_last_name);
         final TextView emailField = (TextView) rootView.findViewById(R.id.profile_email);
         final TextView passwordField = (TextView) rootView.findViewById(R.id.profile_password);
-        MyHTTPRequests rtaskget = new MyHTTPRequests();
+        MyHttpRequests rtaskget = new MyHttpRequests();
         String id = UserID.id;
         try{
             //rtaskget.execute("/api/user/" + id,"GET");
@@ -76,7 +76,7 @@ public class ProfileFragment extends Fragment
             public void onClick(View v)
             {
                 try{
-                    String ret = new MyHTTPRequests().execute("/api/user/" + UserID.id, "PUT",
+                    String ret = new MyHttpRequests().execute("/api/user/" + UserID.id, "PUT",
                             "{'password':'" + passwordField.getText().toString() + "', 'email':'" + emailField.getText().toString() + "','lastname':'" + lastnameField.getText().toString() + "', 'firstname':'" + firstnameField.getText().toString() +"'}").get();
                     Log.e("AN UPDATE WAS MADE PUT", ret);
                 } catch(Exception e){

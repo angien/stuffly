@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * Created by MadnessX on 12/2/2014.
  */
-public class MyHTTPRequests extends AsyncTask<String, Integer, String> {
+public class MyHttpRequests extends AsyncTask<String, Integer, String> {
     protected String doInBackground(String ... params) {
 //        int count = urls.length;
 //        long totalSize = 0;
@@ -85,10 +85,10 @@ public class MyHTTPRequests extends AsyncTask<String, Integer, String> {
                 // Execute HTTP Post Request
                 HttpResponse response = httpclient.execute(httppost);
                 int temp = response.getStatusLine().getStatusCode();
-                Log.i("MyHTTPRequests POST", ""+temp);
+                Log.i("MyHttpRequests POST", ""+temp);
                 if (temp == 200) return "true";
             } catch (Exception e){
-                Log.e("MyHTTPRequests POST", e.toString());
+                Log.e("MyHttpRequests POST", e.toString());
             }
         }
         else{//PUT

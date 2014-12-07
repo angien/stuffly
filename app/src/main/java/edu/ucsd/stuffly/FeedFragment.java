@@ -42,7 +42,7 @@ public class FeedFragment extends Fragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState)
     {
-        MyHTTPRequests rtaskget = new MyHTTPRequests();
+        MyHttpRequests rtaskget = new MyHttpRequests();
         try{
             rtaskget.execute("/api/post/","GET");
             JSONArray feed = new JSONArray(rtaskget.get());

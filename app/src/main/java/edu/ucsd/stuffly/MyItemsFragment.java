@@ -78,7 +78,7 @@ public class MyItemsFragment extends Fragment
                 if (item.toString().equals("My Items")) {
                     try {
 
-                        JSONArray postArray = new JSONArray(new MyHTTPRequests().execute("/api/user/" + uid + "/posts", "GET").get());
+                        JSONArray postArray = new JSONArray(new MyHttpRequests().execute("/api/user/" + uid + "/posts", "GET").get());
 
                         for (int i = 0; i < postArray.length(); i++) {
                             text1[i] = postArray.getJSONObject(i).getString("title");
@@ -98,12 +98,12 @@ public class MyItemsFragment extends Fragment
 
                     try {
 
-                        //JSONObject userInfo = new JSONObject(new MyHTTPRequests().execute("/api/user/" + id, "GET").get());
+                        //JSONObject userInfo = new JSONObject(new MyHttpRequests().execute("/api/user/" + id, "GET").get());
                         //JSONArray postIDarray = userInfo.getJSONArray("posts");
 
 
                         for (int i = 0; i < 10; i++) {
-                            //JSONObject postContent = new JSONObject(new MyHTTPRequests().execute("/api/post/" + postIDarray.getString(i), "GET").get());
+                            //JSONObject postContent = new JSONObject(new MyHttpRequests().execute("/api/post/" + postIDarray.getString(i), "GET").get());
                             text1[i] = "whatever";
                             text2[i] = "whatever";
                             //text1[i] = "text1: " + Integer.toString(i);
