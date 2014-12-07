@@ -1,5 +1,6 @@
 package edu.ucsd.stuffly;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -8,12 +9,19 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Button;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.net.URL;
 
 /**
  * Created by ryanliao on 10/31/14.
@@ -36,6 +44,9 @@ public class ProfileFragment extends Fragment
         final TextView passwordField = (TextView) rootView.findViewById(R.id.profile_password);
         MyHttpRequests rtaskget = new MyHttpRequests();
         String id = UserID.id;
+
+        ImageLoader il = ImageLoader.getInstance();
+
         try{
             //rtaskget.execute("/api/user/" + id,"GET");
             JSONObject userInfo = new JSONObject(rtaskget.execute("/api/user/" + id,"GET").get());
@@ -67,6 +78,8 @@ public class ProfileFragment extends Fragment
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
+        ImageButton profileEdit = (ImageButton) rootView.findViewById(R.id.profile_pic);
+        il.displayImage("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com.s3-website-us-west-1.amazonaws.com/public/beemo.png",profileEdit);
 
         //save changes
         Button saveButton = (Button) rootView.findViewById(R.id.profile_save_button);
