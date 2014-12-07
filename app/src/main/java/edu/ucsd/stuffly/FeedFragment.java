@@ -6,17 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.ArrayList;
-
-import edu.ucsd.stuffly.R;
 
 /**
  * Created by ryanliao on 10/31/14.
@@ -47,7 +42,7 @@ public class FeedFragment extends Fragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState)
     {
-        RetrieveFeedTask rtaskget = new RetrieveFeedTask();
+        MyHTTPRequests rtaskget = new MyHTTPRequests();
         try{
             rtaskget.execute("/api/post/","GET");
             JSONArray feed = new JSONArray(rtaskget.get());

@@ -9,15 +9,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Button;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import edu.ucsd.stuffly.R;
 
 /**
  * Created by ryanliao on 10/31/14.
@@ -38,7 +34,7 @@ public class ProfileFragment extends Fragment
         final TextView lastnameField = (TextView) rootView.findViewById(R.id.profile_last_name);
         final TextView emailField = (TextView) rootView.findViewById(R.id.profile_email);
         final TextView passwordField = (TextView) rootView.findViewById(R.id.profile_password);
-        RetrieveFeedTask rtaskget = new RetrieveFeedTask();
+        MyHTTPRequests rtaskget = new MyHTTPRequests();
         String id = UserID.id;
         try{
             //rtaskget.execute("/api/user/" + id,"GET");
@@ -80,7 +76,7 @@ public class ProfileFragment extends Fragment
             public void onClick(View v)
             {
                 try{
-                    String ret = new RetrieveFeedTask().execute("/api/user/" + UserID.id, "PUT",
+                    String ret = new MyHTTPRequests().execute("/api/user/" + UserID.id, "PUT",
                             "{'password':'" + passwordField.getText().toString() + "', 'email':'" + emailField.getText().toString() + "','lastname':'" + lastnameField.getText().toString() + "', 'firstname':'" + firstnameField.getText().toString() +"'}").get();
                     Log.e("AN UPDATE WAS MADE PUT", ret);
                 } catch(Exception e){

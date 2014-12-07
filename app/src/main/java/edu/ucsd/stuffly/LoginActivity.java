@@ -56,7 +56,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
     private View mProgressView;
     private View mLoginFormView;
 
-    private static MyHttpRequests my_request = new MyHttpRequests();
+    private static LoginRequest my_request = new LoginRequest();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -227,7 +227,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            RetrieveFeedTask rtaskpost = new RetrieveFeedTask();
+            MyHTTPRequests rtaskpost = new MyHTTPRequests();
             try{
                 String reg = "{'email':'" + mEmailView.getText().toString() + "', password:'" + mPasswordView.getText().toString()+ "'}";
                 rtaskpost.execute("/api/user/", "POST", reg);
@@ -422,7 +422,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
                 return my_request.login(mEmail, mPassword);
             }else if(params[0].equals("register")) {
                 // register new user
-                RetrieveFeedTask rtaskpost = new RetrieveFeedTask();
+                MyHTTPRequests rtaskpost = new MyHTTPRequests();
                 try{
                     rtaskpost.execute("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com/api/user/","POST","{'password':'HAHa','email':'HAHa','lastname':'HA','firstname':'HAR'}");
                     String ret = rtaskpost.get();
