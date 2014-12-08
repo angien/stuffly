@@ -1,5 +1,6 @@
 package edu.ucsd.stuffly;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -55,6 +56,59 @@ public class MyItemsFragment extends Fragment
     }
 
     @Override
+    public void onAttach (Activity a) {
+
+//        int pos = spinner.getSelectedItemPosition();
+//        if (pos == 0) {
+//            try {
+//
+//                JSONArray postArray = new JSONArray(new MyHttpRequests().execute("/api/user/" + UserID.id + "/posts", "GET").get());
+//
+//                for (int i = 0; i < postArray.length(); i++) {
+//
+//                    text1.add(i, postArray.getJSONObject(i).getString("title"));
+//                    text2.add(i, postArray.getJSONObject(i).getString("description"));
+//                    json.add(i, postArray.getJSONObject(i));
+//
+//                }
+//
+//
+//            } catch (Exception e) {
+//                Log.e("MYITEMS GET2", e.toString());
+//
+//            }
+//        }
+//        else {
+//            Log.e("SPINNER MOVED", "asdf");
+//
+//            try {
+//
+//                //JSONObject userInfo = new JSONObject(new MyHttpRequests().execute("/api/user/" + id, "GET").get());
+//                //JSONArray postIDarray = userInfo.getJSONArray("posts");
+//
+//
+//                for (int i = 0; i < 10; i++) {
+//                    //JSONObject postContent = new JSONObject(new MyHttpRequests().execute("/api/post/" + postIDarray.getString(i), "GET").get());
+//                    text1.add(i, "whatever");
+//                    text2.add(i, "whatever");
+//                    //text1[i] = "text1: " + Integer.toString(i);
+//                    //text2[i] = "text2: " + Integer.toString(i);
+//                    json.add(i, new JSONObject());
+//                    Log.e("MY ITEMS", text1.get(i));
+//                }
+//
+//
+//            } catch (Exception e) {
+//                Log.e("MYITEMS GET2", e.toString());
+//            }
+//
+//        }
+//        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, json);
+//        myItemsListView.setAdapter(arrayAdapter);
+        super.onAttach(a);
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState)
     {
        /*
@@ -63,8 +117,6 @@ public class MyItemsFragment extends Fragment
         myItemsListView = (ListView) getActivity().findViewById(R.id.myItemslistView);
         arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, json);
         myItemsListView.setAdapter(arrayAdapter);
-
-
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
