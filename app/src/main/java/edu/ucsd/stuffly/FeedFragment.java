@@ -1,5 +1,6 @@
 package edu.ucsd.stuffly;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -37,6 +38,39 @@ public class FeedFragment extends Fragment
 
 
         return rootView;
+    }
+
+    @Override
+    public void onAttach (Activity a) {
+//        MyHttpRequests rtaskget = new MyHttpRequests();
+//        try{
+//            rtaskget.execute("/api/post/","GET");
+//            JSONArray feed = new JSONArray(rtaskget.get());
+//
+//            for(int i = 0; i < feed.length(); i++)
+//            {
+//                text1.add(i,feed.getJSONObject(i).getString("title"));
+//                text2.add(i,feed.getJSONObject(i).getString("description"));
+//                json.add(i,feed.getJSONObject(i));
+//
+//                Log.i("STUFFFFFF url", text1.get(i));
+//                //text1[i] = "text1: " + Integer.toString(i);
+//                //text2[i] = "text2: " + Integer.toString(i);
+//            }
+//
+//
+//        }catch(Exception e){
+//            Log.e("FeedFragment GET", "treat yo self");
+//        }
+//
+//
+//        //feed_list = new ArrayList<String>();
+//        //listview_feed = (ListView) getActivity().findViewById(R.id.listview_feed);
+//        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, json);
+//        listview_feed.setAdapter(arrayAdapter);
+
+        super.onAttach(a);
+
     }
 
     @Override

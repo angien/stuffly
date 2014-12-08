@@ -28,4 +28,7 @@ dependencies {
     compile files('libraries/libGoogleAnalyticsServices.jar')
     compile files('libraries/universal-image-loader-1.9.3.jar')
     compile files('libraries/httpmime-4.2.4.jar')
+    compile files('/Users/Angie/GitHub/stuffly/libraries/libGoogleAnalyticsServices.jar')
+    compile files('/Users/Angie/GitHub/stuffly/libraries/httpmime-4.2.4.jar')
+    compile files('/Users/Angie/GitHub/stuffly/libraries/universal-image-loader-1.9.3.jar')
 }
