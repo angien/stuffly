@@ -11,5 +11,9 @@ public class UserID {
         this.id = id;
     }
 
+    public static String getUserId(){
+        return id;
+    }
+
 }
 
