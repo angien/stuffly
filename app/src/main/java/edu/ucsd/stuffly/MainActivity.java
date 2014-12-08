@@ -2,6 +2,7 @@ package edu.ucsd.stuffly;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.app.Dialog;
@@ -26,6 +27,11 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 
+import com.facebook.UiLifecycleHelper;
+import com.facebook.android.DialogError;
+import com.facebook.android.Facebook;
+import com.facebook.android.FacebookError;
+import com.facebook.widget.FacebookDialog;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
@@ -49,6 +55,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     private DialogFragment df;
     // Tab titles
     private String[] tabs = { "Feed", "Messages", "My Items", "Profile" };
+
+    Facebook facebook = new Facebook("1507378456205227");
+    public static UiLifecycleHelper uiHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -110,8 +119,49 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         //ViewPager can't be cast to FrameLayout
         //fl = (FrameLayout)findViewById(R.id.pager);
         //fl.getForeground().setAlpha(0);
+
+        /**
+         * Facebook integration; login
+         */
+        facebook.authorize(this, new String[] { "publish_actions" }, new Facebook.DialogListener() {
+            @Override
+            public void onComplete(Bundle values) {}
+
+            @Override
+            public void onFacebookError(FacebookError error) {}
+
+            @Override
+            public void onError(DialogError e) {}
+
+            @Override
+            public void onCancel() {}
+        });
+
+        /**
+         * Facebook share post
+         */
+        uiHelper = new UiLifecycleHelper(this, null);
+        uiHelper.onCreate(savedInstanceState);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        facebook.authorizeCallback(requestCode, resultCode, data);
+
+        uiHelper.onActivityResult(requestCode, resultCode, data, new FacebookDialog.Callback() {
+            @Override
+            public void onError(FacebookDialog.PendingCall pendingCall, Exception error, Bundle data) {
+                Log.e("Activity", String.format("Error: %s", error.toString()));
+            }
+
+            @Override
+            public void onComplete(FacebookDialog.PendingCall pendingCall, Bundle data) {
+                Log.i("Activity", "Success!");
+            }
+        });
+    }
 //    @Override
 //    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft)
 //    {
@@ -195,5 +245,29 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     @Override
     public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        uiHelper.onResume();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        uiHelper.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        uiHelper.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        uiHelper.onDestroy();
     }
 }
