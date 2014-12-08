@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -28,10 +29,16 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.internal.Constants;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 public class CreatePostFragment extends DialogFragment {
@@ -99,12 +106,8 @@ public class CreatePostFragment extends DialogFragment {
         img_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                File photo = new File(Environment.getExternalStorageDirectory(),  "Pic.jpg");
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                        Uri.fromFile(photo));
-                imageUri = Uri.fromFile(photo);
-                startActivityForResult(intent, 1);
+                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 0);
             }
         });
 
@@ -170,23 +173,19 @@ public class CreatePostFragment extends DialogFragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
-        InputStream stream = null;
-        switch (requestCode) {
-            case 1:
-                try {
-                    // recyle unused bitmaps
-                    if (bitmap != null) {
-                        bitmap.recycle();
-                    }
-                    stream = getActivity().getContentResolver().openInputStream(data.getData());
-                    bitmap = BitmapFactory.decodeStream(stream);
+        Bitmap bp = (Bitmap) data.getExtras().get("data");
+        img_btn.setImageBitmap(bp);
 
-                    img_btn.setImageBitmap(bitmap);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-        }
+//        AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( MY_ACCESS_KEY_ID, MY_SECRET_KEY ) );
+//        s3Client.createBucket( MY_PICTURE_BUCKET );
+//        PutObjectRequest por = new PutObjectRequest( Constants.getPictureBucket(), Constants.PICTURE_NAME, new java.io.File( filePath) );
+//        s3Client.putObject( por );
+
+
+
     }
+
 
 }
