@@ -29,17 +29,17 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.internal.Constants;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CreatePostFragment extends DialogFragment {
 
@@ -53,6 +53,8 @@ public class CreatePostFragment extends DialogFragment {
     Spinner cate_spinner;
     ImageButton img_btn;
     Button stuffit_btn;
+    File photoFile;
+    String mCurrentPhotoPath;
 
     Uri imageUri;
     boolean obo_bool;
@@ -107,7 +109,23 @@ public class CreatePostFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 0);
+
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    // Create the File where the photo should go
+                    photoFile = null;
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException ex) {
+                        // Error occurred while creating the File
+                        Log.e("hey", ex.toString());
+                    }
+                    // Continue only if the File was successfully created
+                    if (photoFile != null) {
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                                Uri.fromFile(photoFile));
+                        startActivityForResult(intent, 0);
+                    }
+                }
             }
         });
 
@@ -170,21 +188,37 @@ public class CreatePostFragment extends DialogFragment {
         return OptionDialog;
     }
 
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
-        Bitmap bp = (Bitmap) data.getExtras().get("data");
-        img_btn.setImageBitmap(bp);
-
-//        AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( MY_ACCESS_KEY_ID, MY_SECRET_KEY ) );
-//        s3Client.createBucket( MY_PICTURE_BUCKET );
-//        PutObjectRequest por = new PutObjectRequest( Constants.getPictureBucket(), Constants.PICTURE_NAME, new java.io.File( filePath) );
-//        s3Client.putObject( por );
+//        Bitmap bp = (Bitmap) data.getExtras().get("data");
+  //      img_btn.setImageBitmap(bp);
 
 
+            new UploadToImgurTask().execute(photoFile);
 
+       // AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( MY_ACCESS_KEY_ID, MY_SECRET_KEY ) );
+        //s3Client.createBucket( MY_PICTURE_BUCKET );
+        //PutObjectRequest por = new PutObjectRequest( Constants.getPictureBucket(), Constants.PICTURE_NAME, new java.io.File( filePath) );
+        //s3Client.putObject( por );
     }
 
 
