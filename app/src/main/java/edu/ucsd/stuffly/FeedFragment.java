@@ -22,18 +22,18 @@ public class FeedFragment extends Fragment
     ListView listview_feed;
     FeedArrayAdapter arrayAdapter;
 
-    private String[] text1;
-    private String[] text2;
-    private JSONObject[] json;
+    private ArrayList<String> text1;
+    private ArrayList<String> text2;
+    private ArrayList<JSONObject> json;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
 
         View rootView = inflater.inflate(R.layout.fragment_feed, container, false);
-        text1 = new String[10];
-        text2 = new String[10];
-        json = new JSONObject[10];
+        text1 = new ArrayList<String>();
+        text2 = new ArrayList<String>();
+        json = new ArrayList<JSONObject>();
 
 
         return rootView;
@@ -49,11 +49,11 @@ public class FeedFragment extends Fragment
 
             for(int i = 0; i < feed.length(); i++)
             {
-                text1[i] = feed.getJSONObject(i).getString("title");
-                text2[i] = feed.getJSONObject(i).getString("description");
-                json[i] = feed.getJSONObject(i);
+                text1.add(i,feed.getJSONObject(i).getString("title"));
+                text2.add(i,feed.getJSONObject(i).getString("description"));
+                json.add(i,feed.getJSONObject(i));
 
-                Log.i("STUFFFFFF url", text1[i]);
+                Log.i("STUFFFFFF url", text1.get(i));
                 //text1[i] = "text1: " + Integer.toString(i);
                 //text2[i] = "text2: " + Integer.toString(i);
             }

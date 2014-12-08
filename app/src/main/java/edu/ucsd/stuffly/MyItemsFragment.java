@@ -26,9 +26,9 @@ public class MyItemsFragment extends Fragment
     FeedArrayAdapter arrayAdapter;
     Spinner spinner;
 
-    private String[] text1;
-    private String[] text2;
-    private JSONObject[] json;
+    private ArrayList<String> text1;
+    private ArrayList<String> text2;
+    private ArrayList<JSONObject> json;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,9 +36,9 @@ public class MyItemsFragment extends Fragment
 
 
         View rootView = inflater.inflate(R.layout.fragment_myitems, container, false);
-        text1 = new String[10];
-        text2 = new String[10];
-        json = new JSONObject[10];
+        text1 = new ArrayList<String>();
+        text2 = new ArrayList<String>();
+        json = new ArrayList<JSONObject>();
 
 
 
@@ -71,9 +71,9 @@ public class MyItemsFragment extends Fragment
                 Object item = parent.getItemAtPosition(pos);
                 String uid = UserID.id;
 
-                text1 = new String[10];
-                text2 = new String[10];
-                json = new JSONObject[10];
+                text1 = new ArrayList<String>();
+                text2 = new ArrayList<String>();
+                json = new ArrayList<JSONObject>();
 
                 if (item.toString().equals("My Items")) {
                     try {
@@ -81,9 +81,10 @@ public class MyItemsFragment extends Fragment
                         JSONArray postArray = new JSONArray(new MyHttpRequests().execute("/api/user/" + uid + "/posts", "GET").get());
 
                         for (int i = 0; i < postArray.length(); i++) {
-                            text1[i] = postArray.getJSONObject(i).getString("title");
-                            text2[i] = postArray.getJSONObject(i).getString("description");
-                            json[i] = postArray.getJSONObject(i);
+
+                            text1.add(i, postArray.getJSONObject(i).getString("title"));
+                            text2.add(i, postArray.getJSONObject(i).getString("description"));
+                            json.add(i, postArray.getJSONObject(i));
 
                         }
 
@@ -104,12 +105,12 @@ public class MyItemsFragment extends Fragment
 
                         for (int i = 0; i < 10; i++) {
                             //JSONObject postContent = new JSONObject(new MyHttpRequests().execute("/api/post/" + postIDarray.getString(i), "GET").get());
-                            text1[i] = "whatever";
-                            text2[i] = "whatever";
+                            text1.add(i, "whatever");
+                            text2.add(i, "whatever");
                             //text1[i] = "text1: " + Integer.toString(i);
                             //text2[i] = "text2: " + Integer.toString(i);
-                            json[i] = new JSONObject();
-                            Log.e("MY ITEMS", text1[i]);
+                            json.add(i, new JSONObject());
+                            Log.e("MY ITEMS", text1.get(i));
                         }
 
 
