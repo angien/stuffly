@@ -1,96 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="325dp" android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="325dp"
-    android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal"
-    android:padding="10dp"
-    android:id="@+id/item_detail_linear_layout">
-
-    <TextView
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:text="Title"
-        android:id="@+id/item_detail_title"
-        android:textSize="45dp"
-        android:gravity="bottom"/>
+        android:layout_height="fill_parent">
 
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="200dp"
-        android:id="@+id/item_detail_pic" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        android:id="@+id/item_detail_description"
-        android:textSize="16dp"
-        android:maxHeight="120dp"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent" android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp"
+        android:id="@+id/item_detail_linear_layout">
 
         <TextView
-            android:layout_width="150dp"
-            android:layout_height="35dp"
-            android:text="$0.00"
-            android:id="@+id/item_detail_price"
-            android:textSize="30dp"
-            android:gravity="center_vertical|right" />
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:text="Title"
+            android:id="@+id/item_detail_title"
+            android:textSize="45dp"
+            android:gravity="bottom"/>
 
-        <CheckBox
-            android:layout_width="85dp"
-            android:layout_height="35dp"
-            android:text="OBO"
-            android:id="@+id/item_detail_obo"
-            android:checked="false"
-            android:textSize="24dp"
-            android:enabled="true"
-            android:clickable="false"
-            android:layout_marginLeft="50dp"
-            android:gravity="center_vertical" />
-
-    </LinearLayout>
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:id="@+id/item_detail_pic" />
 
         <TextView
-            android:layout_width="130dp"
-            android:layout_height="32dp"
-            android:text="Off-Campus"
-            android:id="@+id/item_detail_location"
-            android:textSize="24dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:id="@+id/item_detail_description"
+            android:textSize="16dp"
+            android:maxHeight="120dp"
             android:layout_marginTop="10dp"
-            android:padding="1dp"/>
+            android:padding="10dp"/>
 
         <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp">
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:text="$0.00"
+                android:id="@+id/item_detail_price"
+                android:textSize="30dp"
+                android:gravity="center_vertical|right" />
+
+            <CheckBox
+                android:layout_width="85dp"
+                android:layout_height="35dp"
+                android:text="OBO"
+                android:id="@+id/item_detail_obo"
+                android:checked="false"
+                android:textSize="24dp"
+                android:enabled="true"
+                android:clickable="false"
+                android:layout_marginLeft="50dp"
+                android:gravity="center_vertical" />
+
+        </LinearLayout>
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="32dp"
+                android:text="Off-Campus"
+                android:id="@+id/item_detail_location"
+                android:textSize="24dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:padding="1dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/item_detail_message_text"
+            android:layout_gravity="center_horizontal"
+            android:hint="Write your message"
+            android:editable="true"
+            android:focusable="true"
+            android:enabled="true"
+            android:gravity="bottom"
+            android:minHeight="100dp"/>
 
         <Button
-            android:layout_width="100dp"
+            android:layout_width="fill_parent"
             android:layout_height="60dp"
             android:text="Message"
             android:id="@+id/item_detail_message_button"
             android:background="@drawable/button_color"
             android:layout_marginRight="5dp" />
 
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:text="Offer"
-            android:id="@+id/item_detail_offer_button"
-            android:background="@drawable/button_color"
-            android:layout_marginLeft="5dp" />
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
