@@ -178,13 +178,10 @@ public class CreatePostFragment extends DialogFragment {
         Bitmap bp = (Bitmap) data.getExtras().get("data");
         img_btn.setImageBitmap(bp);
 
-//        AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( MY_ACCESS_KEY_ID, MY_SECRET_KEY ) );
-//        s3Client.createBucket( MY_PICTURE_BUCKET );
-//        PutObjectRequest por = new PutObjectRequest( Constants.getPictureBucket(), Constants.PICTURE_NAME, new java.io.File( filePath) );
-//        s3Client.putObject( por );
-
-
-
+        AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( MY_ACCESS_KEY_ID, MY_SECRET_KEY ) );
+        s3Client.createBucket( MY_PICTURE_BUCKET );
+        PutObjectRequest por = new PutObjectRequest( Constants.getPictureBucket(), Constants.PICTURE_NAME, new java.io.File( filePath) );
+        s3Client.putObject( por );
     }
 
 
