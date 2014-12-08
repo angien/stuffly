@@ -55,6 +55,7 @@ public class CreatePostFragment extends DialogFragment {
     Button stuffit_btn;
     File photoFile;
     String mCurrentPhotoPath;
+    String image_url;
 
     Uri imageUri;
     boolean obo_bool;
@@ -158,7 +159,7 @@ public class CreatePostFragment extends DialogFragment {
                     post_json.put("location", loc_spinner.getSelectedItem().toString());
                     post_json.put("condition", cond_spinner.getSelectedItem().toString());
                     post_json.put("obo", obo_bool);
-                    post_json.put("imageUrl", "http://vignette1.wikia.nocookie.net/pokemon/images/6/64/025Pikachu_AG_anime_4.png/revision/latest?cb=20140410200756");
+                    post_json.put("imageUrl", image_url);
                 }catch(Exception e){
                     Log.e("create post", "json error");
                 }
@@ -213,7 +214,13 @@ public class CreatePostFragment extends DialogFragment {
   //      img_btn.setImageBitmap(bp);
 
 
-            new UploadToImgurTask().execute(photoFile);
+        try {
+            JSONObject ret = new UploadToImgurTask().execute(photoFile).get();
+            image_url = ret.getJSONObject("data").getJSONObject("link").toString();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
        // AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( MY_ACCESS_KEY_ID, MY_SECRET_KEY ) );
         //s3Client.createBucket( MY_PICTURE_BUCKET );
