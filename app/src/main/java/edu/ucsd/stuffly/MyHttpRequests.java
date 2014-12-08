@@ -42,7 +42,7 @@ public class MyHttpRequests extends AsyncTask<String, Integer, String> {
 //            if (isCancelled()) break;
 //        }
 //        return totalSize;
-        String serverURL = "http://test-master-env-ecmnn89sfm.elasticbeanstalk.com" + params[0];
+        String serverURL = "http://stuffly.herokuapp.com" + params[0];
 
         if (params[1].equals("GET")) { // A GET
             StringBuilder builder = new StringBuilder();
