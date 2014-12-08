@@ -12,6 +12,11 @@
         <item>My Items</item>
         <item>My Bids</item>
     </string-array>
+    <string-array name="condition_array">
+        <item>Acceptable</item>
+        <item>Good</item>
+        <item>Excellent</item>
+    </string-array>
 
     <string name="facebook_app_id">1520982274821069</string>
 
