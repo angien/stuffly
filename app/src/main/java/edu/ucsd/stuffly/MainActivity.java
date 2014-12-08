@@ -1,6 +1,7 @@
 package edu.ucsd.stuffly;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.app.Dialog;
@@ -130,6 +131,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
                 return true;
             case R.id.refresh:
+                recreate();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
