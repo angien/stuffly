@@ -90,7 +90,16 @@
             android:gravity="bottom"
             android:minHeight="100dp"/>
 
-        <Button
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:text="Share"
+                android:id="@+id/item_detail_facebook_button"
+                android:background="@drawable/facebook_color"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="10dp"/>
+
+            <Button
             android:layout_width="fill_parent"
             android:layout_height="60dp"
             android:text="Message"

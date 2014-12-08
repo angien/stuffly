@@ -81,10 +81,24 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="support-annotations-21.0.2" level="project" />
+    <orderEntry type="library" exported="" name="aws-android-sdk-2.1.5-elb" level="project" />
+    <orderEntry type="library" exported="" name="aws-android-sdk-2.1.5-cloudwatch" level="project" />
+    <orderEntry type="library" exported="" name="aws-android-sdk-2.1.5-mobileanalytics" level="project" />
+    <orderEntry type="library" exported="" name="aws-android-sdk-2.1.5-ddb-mapper" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.2" level="project" />
+    <orderEntry type="library" exported="" name="aws-android-sdk-2.1.5-ses" level="project" />
+    <orderEntry type="library" exported="" name="aws-android-sdk-2.1.5-sqs" level="project" />
+    <orderEntry type="library" exported="" name="aws-android-sdk-2.1.5-core" level="project" />
+    <orderEntry type="library" exported="" name="aws-android-sdk-2.1.5-autoscaling" level="project" />
+    <orderEntry type="library" exported="" name="aws-android-sdk-2.1.5-ddb" level="project" />
+    <orderEntry type="library" exported="" name="aws-android-sdk-2.1.5-kinesis" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-21.0.2" level="project" />
+    <orderEntry type="library" exported="" name="aws-android-sdk-2.1.5-sdb" level="project" />
     <orderEntry type="library" exported="" name="libGoogleAnalyticsServices" level="project" />
     <orderEntry type="library" exported="" name="1_libGoogleAnalyticsServices" level="project" />
+    <orderEntry type="library" exported="" name="aws-android-sdk-2.1.5-sns" level="project" />
+    <orderEntry type="library" exported="" name="aws-android-sdk-2.1.5-s3" level="project" />
+    <orderEntry type="library" exported="" name="aws-android-sdk-2.1.5-ec2" level="project" />
     <orderEntry type="library" exported="" name="bolts-android-1.1.2" level="project" />
     <orderEntry type="library" exported="" name="play-services-6.1.71" level="project" />
     <orderEntry type="library" exported="" name="universal-image-loader-1.9.3" level="project" />
