@@ -2,13 +2,15 @@ package edu.ucsd.stuffly;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.app.Dialog;
 import android.support.v4.app.DialogFragment;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.text.Layout;
 import android.util.Log;
@@ -31,6 +33,8 @@ import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import java.util.List;
 
 import edu.ucsd.stuffly.R;
 
@@ -108,23 +112,21 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         //fl.getForeground().setAlpha(0);
     }
 
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft)
-    {
-    }
-
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft)
-    {
-        // on tab selected
-        // show respected fragment view
-        viewPager.setCurrentItem(tab.getPosition());
-    }
-
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft)
-    {
-    }
+//    @Override
+//    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft)
+//    {
+//    }
+//
+//    @Override
+//    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft)
+//    {
+//
+//    }
+//
+//    @Override
+//    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft)
+//    {
+//    }
 
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -141,7 +143,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
                 return true;
             case R.id.refresh:
-                recreate();
+                final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                Fragment temp = getVisibleFragment();
+                ft.detach(temp);
+                ft.attach(temp);
+                ft.commit();
 
                 return true;
             default:
@@ -161,5 +167,33 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         super.onStop();
 
         EasyTracker.getInstance(this).activityStop(this);
+    }
+
+    public Fragment getVisibleFragment(){
+        FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        for (Fragment fragment : fragments){
+            if(fragment != null && fragment.isVisible()){
+                return fragment;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
+        // on tab selected
+        // show respected fragment view
+        viewPager.setCurrentItem(tab.getPosition());
+    }
+
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
+
+    }
+
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
+
     }
 }
