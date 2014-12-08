@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="32dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:text="From"
+                android:id="@+id/message_detail_from_label"
+                android:textSize="24dp"
+                android:gravity="bottom" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:id="@+id/message_detail_from_name"
+                android:layout_marginLeft="10dp"
+                android:textSize="30dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Message"
+                android:id="@+id/message_detai_message_label"
+                android:textSize="24dp"
+                android:maxHeight="500dp" />
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Their message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message"
+                    android:id="@+id/message_detail_message_text"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="10dp"/>
+            </ScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Reply"
+                android:id="@+id/message_detail_reply_label"
+                android:textSize="24dp"
+                android:maxHeight="500dp" />
+
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:ems="10"
+                    android:id="@+id/message_detail_reply_text"
+                    android:layout_weight="1"
+                    android:hint="Your reply"
+                    android:editable="true"
+                    android:focusable="true"
+                    android:enabled="true"
+                    android:gravity="bottom"
+                    android:minHeight="100dp"/>
+            </ScrollView>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:text="Reply"
+            android:id="@+id/message_detail_send_button"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_color"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+</RelativeLayout>
