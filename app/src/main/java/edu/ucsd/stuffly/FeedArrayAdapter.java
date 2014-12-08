@@ -30,13 +30,13 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
 {
     private final Activity context;
 
-    public String[] feed_textview1_text;
-    public String[] feed_textview2_text;
-    public JSONObject[] feed_json;
+    public ArrayList<String> feed_textview1_text;
+    public ArrayList<String> feed_textview2_text;
+    public ArrayList<JSONObject> feed_json;
     public Image[] feed_imageview_image;
 
 
-    public FeedArrayAdapter(Activity context, String[] text1, String[] text2, JSONObject[] json )//, Image[] image)
+    public FeedArrayAdapter(Activity context, ArrayList<String> text1, ArrayList<String> text2, ArrayList<JSONObject> json )//, Image[] image)
     {
         super(context, R.layout.cell_feed, text1);
         this.context = context;
@@ -67,18 +67,18 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
 
                 try {
                     Log.e("GET VIEW ID USER", UserID.id);
-                    text = feed_json[position].toString();
-                    title = feed_json[position].getString("title");
-                    description = feed_json[position].getString("description");
-                    price = feed_json[position].getInt("price");
-                    obo = feed_json[position].getBoolean("obo");
-                    location = feed_json[position].getString("location");
+                    text = feed_json.get(position).toString();
+                    title = feed_json.get(position).getString("title");
+                    description = feed_json.get(position).getString("description");
+                    price = feed_json.get(position).getInt("price");
+                    obo = feed_json.get(position).getBoolean("obo");
+                    location = feed_json.get(position).getString("location");
 
                     ItemDetailFragment idf = new ItemDetailFragment();
 
                     idf.setContent(title,description, price,obo,location);
 
-                    if ((UserID.id).equals(feed_json[position].getString("user"))) {
+                    if ((UserID.id).equals(feed_json.get(position).getString("user"))) {
                         text = "MATCHES!!!";
                         idf.setSelf(true);
                     }
@@ -100,10 +100,10 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
         //int imageId = getContext().getResources().getDrawable(R.id.app_logo);
 
         TextView feed_textview1 = (TextView) rowView.findViewById(R.id.feed_cell_title);
-        feed_textview1.setText(this.feed_textview1_text[position]);
+        feed_textview1.setText(this.feed_textview1_text.get(position));
 
         TextView feed_textview2 = (TextView) rowView.findViewById(R.id.feed_cell_description);
-        feed_textview2.setText(this.feed_textview2_text[position]);
+        feed_textview2.setText(this.feed_textview2_text.get(position));
 
         //ImageView feed_imageview = (ImageView) rowView.findViewById(R.id.feed_imageview);
         //feed_imageview.setImageResource(R.drawable.app_logo);

@@ -30,13 +30,13 @@ import java.util.ArrayList;
 public class MessagesArrayAdapter extends ArrayAdapter<String> {
     private final Activity context;
 
-    public String[] messages_textview1_text;
-    public String[] messages_textview2_text;
-    public JSONObject[] messages_json;
+    public ArrayList<String> messages_textview1_text;
+    public ArrayList<String> messages_textview2_text;
+    public ArrayList<JSONObject> messages_json;
     public Image[] messages_imageview_image;
 
 
-    public MessagesArrayAdapter(Activity context, String[] text1, String[] text2, JSONObject[] json )//, Image[] image)
+    public MessagesArrayAdapter(Activity context, ArrayList<String> text1,  ArrayList<String> text2, ArrayList<String> text3, ArrayList<JSONObject> json )//, Image[] image)
     {
         super(context, R.layout.cell_messages, text1);
         this.context = context;
@@ -67,18 +67,18 @@ public class MessagesArrayAdapter extends ArrayAdapter<String> {
 
                 try {
                     Log.e("GET VIEW ID USER", UserID.id);
-                    text = messages_json[position].toString();
-                    title = messages_json[position].getString("title");
-                    description = messages_json[position].getString("description");
-                    price = messages_json[position].getInt("price");
-                    obo = messages_json[position].getBoolean("obo");
-                    location = messages_json[position].getString("location");
+                    text = messages_json.get(position).toString();
+                    title = messages_json.get(position).getString("title");
+                    description = messages_json.get(position).getString("description");
+                    price = messages_json.get(position).getInt("price");
+                    obo = messages_json.get(position).getBoolean("obo");
+                    location = messages_json.get(position).getString("location");
 
                     ItemDetailFragment idf = new ItemDetailFragment();
 
                     idf.setContent(title,description, price,obo,location);
 
-                    if ((UserID.id).equals(messages_json[position].getString("user"))) {
+                    if ((UserID.id).equals(messages_json.get(position).getString("user"))) {
                         text = "MATCHES!!!";
                         idf.setSelf(true);
                     }
@@ -100,10 +100,10 @@ public class MessagesArrayAdapter extends ArrayAdapter<String> {
         //int imageId = getContext().getResources().getDrawable(R.id.app_logo);
 
         TextView messages_textview1 = (TextView) rowView.findViewById(R.id.messages_cell_title);
-        messages_textview1.setText(this.messages_textview1_text[position]);
+        messages_textview1.setText(this.messages_textview1_text.get(position));
 
         TextView messages_textview2 = (TextView) rowView.findViewById(R.id.messages_cell_description);
-        messages_textview2.setText(this.messages_textview2_text[position]);
+        messages_textview2.setText(this.messages_textview2_text.get(position));
 
         //ImageView messages_imageview = (ImageView) rowView.findViewById(R.id.messages_imageview);
         //messages_imageview.setImageResource(R.drawable.app_logo);
