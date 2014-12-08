@@ -25,11 +25,11 @@ import java.io.File;
 /**
  * Created by Angie on 12/8/14.
  */
-public class UploadToImgurTask extends AsyncTask<File, Void, Boolean> {
+public class UploadToImgurTask extends AsyncTask<File, Void, JSONObject> {
     String upload_to;
 
     @Override
-    protected Boolean doInBackground(File... params) {
+    protected JSONObject doInBackground(File... params) {
         final String upload_to = "https://api.imgur.com/3/upload.json";
         final String API_key = "API_KEY";
         final String TAG = "Awais";
@@ -61,7 +61,7 @@ public class UploadToImgurTask extends AsyncTask<File, Void, Boolean> {
 
             Log.e("TO IMGUR!!!!!", json.toString()); //for my own understanding
 
-            return true;
+            return json;
         } catch (Exception e) {
             Log.e("WHATATATAT", "why");
             e.printStackTrace();
@@ -71,6 +71,6 @@ public class UploadToImgurTask extends AsyncTask<File, Void, Boolean> {
 
 
 
-        return false;
+        return null;
     }
 }
