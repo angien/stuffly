@@ -140,32 +140,32 @@ public class ItemDetailFragment extends DialogFragment {
 
 
     public void facebookShare() {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, "http://stuffly.herokuapp.com/");
-// See if official Facebook app is found
-        boolean facebookAppFound = false;
-        List<ResolveInfo> matches = getActivity().getPackageManager().queryIntentActivities(intent, 0);
-        for (ResolveInfo info : matches) {
-            if (info.activityInfo.packageName.toLowerCase().startsWith("com.facebook")) {
-                intent.setPackage(info.activityInfo.packageName);
-                facebookAppFound = true;
-                break;  }}
-
-        if(facebookAppFound) {
-            FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(getActivity())
-                    .setLink(null)
-                    .build();
-            MainActivity.uiHelper.trackPendingDialogCall(shareDialog.present());
-            return;
-        }
-
-// As fallback, launch sharer.php in a browser
-        else if (!facebookAppFound) {
-            String sharerUrl = "https://www.facebook.com/sharer/sharer.php?u=" + "http://stuffly.herokuapp.com/";
-            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sharerUrl));
-        }
-        startActivity(intent);
+//        Intent intent = new Intent(Intent.ACTION_SEND);
+//        intent.setType("text/plain");
+//        intent.putExtra(Intent.EXTRA_TEXT, "http://stuffly.herokuapp.com/");
+//// See if official Facebook app is found
+//        boolean facebookAppFound = false;
+//        List<ResolveInfo> matches = getActivity().getPackageManager().queryIntentActivities(intent, 0);
+//        for (ResolveInfo info : matches) {
+//            if (info.activityInfo.packageName.toLowerCase().startsWith("com.facebook")) {
+//                intent.setPackage(info.activityInfo.packageName);
+//                facebookAppFound = true;
+//                break;  }}
+//
+//        if(facebookAppFound) {
+//            FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(getActivity())
+//                    .setLink(null)
+//                    .build();
+//            MainActivity.uiHelper.trackPendingDialogCall(shareDialog.present());
+//            return;
+//        }
+//
+//// As fallback, launch sharer.php in a browser
+//        else if (!facebookAppFound) {
+//            String sharerUrl = "https://www.facebook.com/sharer/sharer.php?u=" + "http://stuffly.herokuapp.com/";
+//            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sharerUrl));
+//        }
+//        startActivity(intent);
 
     }
 }

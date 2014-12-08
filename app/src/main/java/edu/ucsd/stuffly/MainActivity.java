@@ -56,8 +56,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     // Tab titles
     private String[] tabs = { "Feed", "Messages", "My Items", "Profile" };
 
-    Facebook facebook = new Facebook("1507378456205227");
-    public static UiLifecycleHelper uiHelper;
+    //Facebook facebook = new Facebook("1507378456205227");
+    //public static UiLifecycleHelper uiHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -123,44 +123,44 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         /**
          * Facebook integration; login
          */
-        facebook.authorize(this, new String[] { "publish_actions" }, new Facebook.DialogListener() {
-            @Override
-            public void onComplete(Bundle values) {}
-
-            @Override
-            public void onFacebookError(FacebookError error) {}
-
-            @Override
-            public void onError(DialogError e) {}
-
-            @Override
-            public void onCancel() {}
-        });
-
-        /**
-         * Facebook share post
-         */
-        uiHelper = new UiLifecycleHelper(this, null);
-        uiHelper.onCreate(savedInstanceState);
+//        facebook.authorize(this, new String[] { "publish_actions" }, new Facebook.DialogListener() {
+//            @Override
+//            public void onComplete(Bundle values) {}
+//
+//            @Override
+//            public void onFacebookError(FacebookError error) {}
+//
+//            @Override
+//            public void onError(DialogError e) {}
+//
+//            @Override
+//            public void onCancel() {}
+//        });
+//
+//        /**
+//         * Facebook share post
+//         */
+//        uiHelper = new UiLifecycleHelper(this, null);
+//        uiHelper.onCreate(savedInstanceState);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        facebook.authorizeCallback(requestCode, resultCode, data);
-
-        uiHelper.onActivityResult(requestCode, resultCode, data, new FacebookDialog.Callback() {
-            @Override
-            public void onError(FacebookDialog.PendingCall pendingCall, Exception error, Bundle data) {
-                Log.e("Activity", String.format("Error: %s", error.toString()));
-            }
-
-            @Override
-            public void onComplete(FacebookDialog.PendingCall pendingCall, Bundle data) {
-                Log.i("Activity", "Success!");
-            }
-        });
+//        facebook.authorizeCallback(requestCode, resultCode, data);
+//
+//        uiHelper.onActivityResult(requestCode, resultCode, data, new FacebookDialog.Callback() {
+//            @Override
+//            public void onError(FacebookDialog.PendingCall pendingCall, Exception error, Bundle data) {
+//                Log.e("Activity", String.format("Error: %s", error.toString()));
+//            }
+//
+//            @Override
+//            public void onComplete(FacebookDialog.PendingCall pendingCall, Bundle data) {
+//                Log.i("Activity", "Success!");
+//            }
+//        });
     }
 //    @Override
 //    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft)
@@ -193,11 +193,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
                 return true;
             case R.id.refresh:
-                final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                Fragment temp = getVisibleFragment();
-                ft.detach(temp);
-                ft.attach(temp);
-                ft.commit();
+                //final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
                 return true;
             default:
@@ -250,24 +246,24 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     @Override
     protected void onResume() {
         super.onResume();
-        uiHelper.onResume();
+        //uiHelper.onResume();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        uiHelper.onSaveInstanceState(outState);
+        //uiHelper.onSaveInstanceState(outState);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        uiHelper.onPause();
+        //uiHelper.onPause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        uiHelper.onDestroy();
+        //uiHelper.onDestroy();
     }
 }
