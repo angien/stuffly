@@ -27,6 +27,8 @@ import android.widget.PopupWindow;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.MapBuilder;
 import com.google.analytics.tracking.android.StandardExceptionParser;
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -61,7 +63,15 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        ImageLoaderConfiguration iconfig = new ImageLoaderConfiguration.Builder(this).build();
+        DisplayImageOptions ioptions = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .build();
+        ImageLoaderConfiguration iconfig = new ImageLoaderConfiguration.Builder(this)
+                .memoryCache(new LruMemoryCache(2*1024*1024))
+                .memoryCacheSize(2*1024*2014)
+                .memoryCacheSizePercentage(13)
+                .defaultDisplayImageOptions(ioptions)
+                .build();
         ImageLoader.getInstance().init(iconfig);
 
         // Adding Tabs
