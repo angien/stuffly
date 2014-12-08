@@ -69,6 +69,15 @@
         android:focusable="false"
         android:layout_gravity="center_horizontal"/>
 
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="Share"
+        android:id="@+id/item_detail_facebook_button"
+        android:background="@drawable/facebook_color"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="10dp"/>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
