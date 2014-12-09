@@ -33,6 +33,28 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
+            android:layout_height="32dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:text="Date"
+                android:id="@+id/message_detail_date_label"
+                android:textSize="24dp"
+                android:gravity="bottom" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:id="@+id/message_detail_date"
+                android:layout_marginLeft="10dp"
+                android:textSize="30dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="250dp"
             android:layout_marginTop="10dp">
 
