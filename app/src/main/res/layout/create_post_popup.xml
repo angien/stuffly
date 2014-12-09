@@ -100,10 +100,9 @@
         android:spinnerMode="dropdown"
         android:gravity="center_horizontal" />
 
-    <TextView
+    <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="No Image Preview"
         android:id="@+id/stuff_pic"
         android:minHeight="60dp"
         android:gravity="center_vertical|center_horizontal" />
