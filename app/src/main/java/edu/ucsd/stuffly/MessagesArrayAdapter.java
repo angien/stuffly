@@ -80,10 +80,10 @@ public class MessagesArrayAdapter extends ArrayAdapter<String> {
                 catch (Exception e) {
                     text = e.toString();
                 }
-                int duration = Toast.LENGTH_SHORT;
+                //int duration = Toast.LENGTH_SHORT;
 
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                //Toast toast = Toast.makeText(context, text, duration);
+                //toast.show();
             }
         });
 
