@@ -94,7 +94,7 @@ public class ItemDetailFragment extends DialogFragment {
             locationView.setText(location);
 
             ImageView imageView = (ImageView) view.findViewById(R.id.item_detail_pic);
-            il.displayImage(picURL,imageView);
+            il.displayImage(picURL, imageView);
 
 //            Button shareButton = (Button) view.findViewById(R.id.item_detail_facebook_button);
 //            shareButton.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +111,18 @@ public class ItemDetailFragment extends DialogFragment {
                     dismiss();
                 }
             });
+
+
+            ImageButton deleteButton = (ImageButton) view.findViewById(R.id.item_detail_editable_delete_button);
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MyHttpRequests a = new MyHttpRequests();
+                    a.execute("/api/post/" + postId, "DELETE");
+                    dismiss();
+                }
+            });
+
         }else{
             View view = inflater.inflate(R.layout.item_detail_popup_editable, null);
             put_json = new JSONObject();
@@ -145,8 +157,7 @@ public class ItemDetailFragment extends DialogFragment {
 
 
             ImageButton cancelButton = (ImageButton) view.findViewById(R.id.item_detail_editable_cancel_button);
-            cancelButton.setOnClickListener(new View.OnClickListener()
-            {
+            cancelButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     dismiss();
@@ -193,6 +204,7 @@ public class ItemDetailFragment extends DialogFragment {
     }
 
     public void setContent(String id, String t, String d, double p, boolean o, String l, String u){
+        postId = id;
         title = t;
         description = d;
         price = p;

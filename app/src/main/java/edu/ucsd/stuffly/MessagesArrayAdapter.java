@@ -30,21 +30,19 @@ import java.util.ArrayList;
 public class MessagesArrayAdapter extends ArrayAdapter<String> {
     private final Activity context;
 
-    public ArrayList<String> messages_textview1_text;
-    public ArrayList<String> messages_textview2_text;
-    public ArrayList<String> messages_textview3_text;
-    public ArrayList<JSONObject> messages_json;
+    public ArrayList<String> date_array;
+    public ArrayList<String> message_array;
+    public ArrayList<JSONObject> json_array;
     public Image[] messages_imageview_image;
 
 
-    public MessagesArrayAdapter(Activity context, ArrayList<String> text1,  ArrayList<String> text2, ArrayList<String> text3, ArrayList<JSONObject> json )//, Image[] image)
+    public MessagesArrayAdapter(Activity context, ArrayList<String> text1,  ArrayList<String> text2, ArrayList<JSONObject> json )//, Image[] image)
     {
         super(context, R.layout.cell_messages, text1);
         this.context = context;
-        this.messages_textview1_text = text1;
-        this.messages_textview2_text = text2;
-        this.messages_textview3_text = text3;
-        this.messages_json =json;
+        this.date_array = text1;
+        this.message_array = text2;
+        this.json_array =json;
         //this.messages_imageview_image = image;
     }
 
@@ -64,17 +62,19 @@ public class MessagesArrayAdapter extends ArrayAdapter<String> {
                 String message;
                 String date = "";
                 String from_id = "";
+                String from_name = "";
 
                 try {
                     Log.e("GET VIEW ID USER", UserID.id);
-                    text = messages_json.get(position).toString();
-                    message = messages_json.get(position).getString("message");
-                    date = messages_json.get(position).getString("date");
-                    from_id = messages_json.get(position).getString("from_id");
+                    text = json_array.get(position).toString();
+                    message = message_array.get(position);
+                    date = date_array.get(position);
+                    from_name = json_array.get(position).getString("firstname") + " " + json_array.get(position).getString("lastname");
+                    from_id = json_array.get(position).getString("_id");
 
                     MessageDetailFragment mdf = new MessageDetailFragment();
 
-                    mdf.setContent(from_id, date, message);
+                    mdf.setContent(from_name, date, message, from_id);
                     mdf.show(((FragmentActivity) context).getSupportFragmentManager(), "itemDetail" + position);
                 }
                 catch (Exception e) {
@@ -89,14 +89,21 @@ public class MessagesArrayAdapter extends ArrayAdapter<String> {
 
         //int imageId = getContext().getResources().getDrawable(R.id.app_logo);
 
-        TextView messages_textview1 = (TextView) rowView.findViewById(R.id.messages_cell_name);
-        messages_textview1.setText(this.messages_textview1_text.get(position));
+
+        try {
+            TextView messages_textview1 = (TextView) rowView.findViewById(R.id.messages_cell_name);
+            messages_textview1.setText(this.json_array.get(position).getString("firstname")+" "+ this.json_array.get(position).getString("lastname"));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         TextView messages_textview2 = (TextView) rowView.findViewById(R.id.messages_cell_date);
-        messages_textview2.setText(this.messages_textview2_text.get(position));
+        messages_textview2.setText(this.date_array.get(position));
 
         TextView messages_textview3 = (TextView) rowView.findViewById(R.id.messages_cell_message);
-        messages_textview3.setText(this.messages_textview3_text.get(position));
+        messages_textview3.setText(this.message_array.get(position));
 
         //ImageView messages_imageview = (ImageView) rowView.findViewById(R.id.messages_imageview);
         //messages_imageview.setImageResource(R.drawable.app_logo);
