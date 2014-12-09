@@ -35,7 +35,9 @@
             android:textSize="16dp"
             android:maxHeight="120dp"
             android:layout_marginTop="10dp"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:requiresFadingEdge="vertical"
+            android:fadingEdgeLength="50dp"/>
 
         <LinearLayout
             android:orientation="horizontal"

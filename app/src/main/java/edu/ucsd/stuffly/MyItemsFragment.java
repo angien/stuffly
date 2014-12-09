@@ -53,13 +53,15 @@ public class MyItemsFragment extends Fragment
         return rootView;
     }
 
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState)
     {
-
+       /*
+*/
         items_list = new ArrayList<String>();
         myItemsListView = (ListView) getActivity().findViewById(R.id.myItemslistView);
-        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, ImageUrls, json);
+        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2,ImageUrls,json);
         myItemsListView.setAdapter(arrayAdapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -69,8 +71,8 @@ public class MyItemsFragment extends Fragment
 
                 text1 = new ArrayList<String>();
                 text2 = new ArrayList<String>();
-                json = new ArrayList<JSONObject>();
                 ImageUrls = new ArrayList<String>();
+                json = new ArrayList<JSONObject>();
 
                 if (item.toString().equals("My Items")) {
                     try {
@@ -81,7 +83,7 @@ public class MyItemsFragment extends Fragment
 
                             text1.add(i, postArray.getJSONObject(i).getString("title"));
                             text2.add(i, postArray.getJSONObject(i).getString("description"));
-                            //ImageUrls.add(i, (postArray.getJSONObject(i).getString("imageUrl") == null ? "" : postArray.getJSONObject(i).getString("imageUrl")));
+                            ImageUrls.add(i, postArray.getJSONObject(i).optString("imageUrl", "http://i.imgur.com/RWLVSt0.png"));
                             json.add(i, postArray.getJSONObject(i));
 
                         }
@@ -107,7 +109,7 @@ public class MyItemsFragment extends Fragment
                             text2.add(i, "whatever");
                             //text1[i] = "text1: " + Integer.toString(i);
                             //text2[i] = "text2: " + Integer.toString(i);
-                            ImageUrls.add(i, "");
+                            ImageUrls.add(i, "http://i.imgur.com/RWLVSt0.png");
                             json.add(i, new JSONObject());
                             Log.e("MY ITEMS", text1.get(i));
                         }
@@ -140,10 +142,16 @@ public class MyItemsFragment extends Fragment
 //                });
 
             }
-
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+
+
+
+
+
+
 
         super.onActivityCreated(savedInstanceState);
 

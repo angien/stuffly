@@ -57,7 +57,7 @@ public class FeedFragment extends Fragment
             {
                 text1.add(i,feed.getJSONObject(i).getString("title"));
                 text2.add(i,feed.getJSONObject(i).getString("description"));
-                //ImageUrls.add(i, (feed.getJSONObject(i).getString("imageUrl") == null ? "" : feed.getJSONObject(i).getString("imageUrl")));
+                ImageUrls.add(i, feed.getJSONObject(i).optString("imageUrl", "http://i.imgur.com/RWLVSt0.png"));
                 json.add(i,feed.getJSONObject(i));
 
                 Log.i("STUFFFFFF url", text1.get(i));

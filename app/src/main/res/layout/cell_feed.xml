@@ -28,8 +28,8 @@
             android:text="Description\nDescription\nDescription\nDescription"
             android:id="@+id/feed_cell_description"
             android:textSize="16dp"
-            android:fadingEdge="vertical"
-            android:fadingEdgeLength="25dp"/>
+            android:requiresFadingEdge="vertical"
+            android:fadingEdgeLength="50dp"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -78,7 +78,7 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
                     price = feed_json.get(position).getInt("price");
                     obo = feed_json.get(position).getBoolean("obo");
                     location = feed_json.get(position).getString("location");
-                    picURL = (feed_json.get(position).getString("imageUrl") == null ? "" : feed_json.get(position).getString("imageUrl"));
+                    picURL = feed_json.get(position).optString("imageUrl", "http://i.imgur.com/RWLVSt0.png");
 
                     ItemDetailFragment idf = new ItemDetailFragment();
 
@@ -105,8 +105,8 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
 
         //int imageId = getContext().getResources().getDrawable(R.id.app_logo);
 
-        //ImageView feed_imageView = (ImageView) rowView.findViewById(R.id.feed_cell_pic);
-        //il.displayImage(this.ImageUrls.get(position),feed_imageView);
+        ImageView feed_imageView = (ImageView) rowView.findViewById(R.id.feed_cell_pic);
+        il.displayImage(this.ImageUrls.get(position),feed_imageView);
 
         TextView feed_textview1 = (TextView) rowView.findViewById(R.id.feed_cell_title);
         feed_textview1.setText(this.feed_textview1_text.get(position));

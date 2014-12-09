@@ -74,7 +74,9 @@
                     android:text="Their message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message"
                     android:id="@+id/message_detail_message_text"
                     android:textSize="20dp"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="10dp"
+                    android:requiresFadingEdge="vertical"
+                    android:fadingEdgeLength="50dp"/>
             </ScrollView>
         </LinearLayout>
 

@@ -41,8 +41,8 @@
             android:text="Message\nMessage\nMessage\nMessage\nMessage\nMessage\n"
             android:id="@+id/messages_cell_message"
             android:textSize="16dp"
-            android:fadingEdge="vertical"
-            android:fadingEdgeLength="25dp"/>
+            android:requiresFadingEdge="vertical"
+            android:fadingEdgeLength="50dp"/>
 
     </LinearLayout>
 
