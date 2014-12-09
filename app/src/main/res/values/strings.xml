@@ -10,7 +10,7 @@
     </string-array>
     <string-array name="my_items_array">
         <item>My Items</item>
-        <item>My Bids</item>
+        <item>Bookmarks</item>
     </string-array>
     <string-array name="condition_array">
         <item>Acceptable</item>
