@@ -70,7 +70,7 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
                 String title = "";
                 String name = "";
                 String description = "";
-                int price = 0;
+                double price = 0;
                 boolean obo = false;
                 String location = "";
                 String id ="";
@@ -85,11 +85,11 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
                         name = names.get(position);
                     }
                     //text = feed_json.get(position).toString();
-                    title = feed_json.get(position).getString("title");
-                    description = feed_json.get(position).getString("description");
-                    price = feed_json.get(position).getInt("price");
-                    obo = feed_json.get(position).getBoolean("obo");
-                    location = feed_json.get(position).getString("location");
+                    title = feed_json.get(position).optString("title","");
+                    description = feed_json.get(position).optString("description","");
+                    price = feed_json.get(position).optDouble("price", 0.00);
+                    obo = feed_json.get(position).optBoolean("obo", false);
+                    location = feed_json.get(position).optString("location","On-campus");
                     picURL = feed_json.get(position).optString("imageUrl", "http://i.imgur.com/RWLVSt0.png");
 
                     ItemDetailFragment idf = new ItemDetailFragment();

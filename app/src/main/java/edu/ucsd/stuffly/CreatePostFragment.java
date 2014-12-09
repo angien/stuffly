@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
@@ -14,6 +15,8 @@ import android.support.v4.app.DialogFragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,6 +40,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -81,6 +85,39 @@ public class CreatePostFragment extends DialogFragment {
         title_et = (EditText)view.findViewById(R.id.stuff_title);
         description_et = (EditText)view.findViewById(R.id.stuff_description);
         price_et = (EditText)view.findViewById(R.id.stuff_price);
+        price_et.setRawInputType(Configuration.KEYBOARD_12KEY);
+        price_et.addTextChangedListener(new TextWatcher(){
+            private String current = "";
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!s.toString().equals(current)){
+                    price_et.removeTextChangedListener(this);
+
+                    String cleanString = s.toString().replaceAll("[$,.]", "");
+
+                    double parsed = Double.parseDouble(cleanString);
+                    String formatted = NumberFormat.getCurrencyInstance().format((parsed/100));
+
+                    current = formatted;
+                    price_et.setText(formatted);
+                    price_et.setSelection(formatted.length());
+
+                    price_et.addTextChangedListener(this);
+                }
+            }
+        });
+
+
         obo_switch = (Switch)view.findViewById(R.id.stuff_obo);
         obo_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -166,7 +203,7 @@ public class CreatePostFragment extends DialogFragment {
                     post_json.put("user", UserID.getUserId());
                     post_json.put("title", title_et.getText().toString());
                     post_json.put("description", description_et.getText().toString());
-                    post_json.put("price", Double.parseDouble(price_et.getText().toString()));
+                    post_json.put("price", NumberFormat.getInstance().parse(price_et.getText().toString().substring(1)));//Double.parseDouble(price_et.getText().toString()));
                     post_json.put("category", cate_spinner.getSelectedItem().toString());
                     post_json.put("location", loc_spinner.getSelectedItem().toString());
                     post_json.put("condition", cond_spinner.getSelectedItem().toString());

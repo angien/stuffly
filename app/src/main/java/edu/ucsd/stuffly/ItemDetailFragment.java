@@ -9,12 +9,15 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -169,6 +172,37 @@ public class ItemDetailFragment extends DialogFragment {
 
             final EditText priceEdit = (EditText) view.findViewById(R.id.item_detail_price_editable);
             priceEdit.setText(f.format(price));
+            priceEdit.setRawInputType(Configuration.KEYBOARD_12KEY);
+            priceEdit.addTextChangedListener(new TextWatcher(){
+                private String current = "";
+
+                @Override
+                public void afterTextChanged(Editable arg0) {
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start,
+                                              int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if(!s.toString().equals(current)){
+                        priceEdit.removeTextChangedListener(this);
+
+                        String cleanString = s.toString().replaceAll("[$,.]", "");
+
+                        double parsed = Double.parseDouble(cleanString);
+                        String formatted = NumberFormat.getCurrencyInstance().format((parsed/100));
+
+                        current = formatted;
+                        priceEdit.setText(formatted);
+                        priceEdit.setSelection(formatted.length());
+
+                        priceEdit.addTextChangedListener(this);
+                    }
+                }
+            });
 
             final CheckBox oboEdit = (CheckBox) view.findViewById(R.id.item_detail_obo_editable);
             oboEdit.setChecked(obo);
@@ -221,7 +255,7 @@ public class ItemDetailFragment extends DialogFragment {
                         put_json.put("title", titleEdit.getText().toString());
                         put_json.put("imageUrl", picURL);
                         put_json.put("description", descriptionEdit.getText().toString());
-                        put_json.put("price", Double.parseDouble(priceEdit.getText().toString().substring(1)));
+                        put_json.put("price", NumberFormat.getInstance().parse(priceEdit.getText().toString().substring(1)));//Double.parseDouble(priceEdit.getText().toString().substring(1)));
                         put_json.put("category", "Electronics");
                         put_json.put("location", locationEdit.getSelectedItem().toString());
                         put_json.put("condition", "Acceptable");
