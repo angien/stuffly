@@ -17,10 +17,10 @@
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="32dp"
+            android:layout_height="40dp"
             android:text="Title"
             android:id="@+id/feed_cell_title"
-            android:textSize="30dp" />
+            android:textSize="28dp" />
 
         <TextView
             android:layout_width="fill_parent"
