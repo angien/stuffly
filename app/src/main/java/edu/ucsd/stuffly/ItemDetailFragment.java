@@ -4,6 +4,8 @@ package edu.ucsd.stuffly;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
@@ -44,11 +46,12 @@ import java.util.List;
 public class ItemDetailFragment extends DialogFragment {
     String title = "";
     String description = "";
-    int price = 0;
+    double price = 0;
     boolean obo = false;
     String category = "";
     String location = "Off-campus";
     boolean self = false;
+    NumberFormat f = NumberFormat.getCurrencyInstance();
 
     public ItemDetailFragment() {
         // Required empty public constructor
@@ -58,8 +61,6 @@ public class ItemDetailFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-
-        NumberFormat f = NumberFormat.getCurrencyInstance();
 
         if(!self) {
             View view = inflater.inflate(R.layout.item_detail_popup, null);
@@ -82,12 +83,13 @@ public class ItemDetailFragment extends DialogFragment {
             locationView.setText(location);
 
             Button shareButton = (Button) view.findViewById(R.id.item_detail_facebook_button);
-            shareButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    facebookShare();
-                }
-            });
+            shareButton.setVisibility(View.GONE);
+//            shareButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    facebookShare(title, description, price, obo, location);
+//                }
+//            });
         }else{
             View view = inflater.inflate(R.layout.item_detail_popup_editable, null);
 
@@ -116,7 +118,7 @@ public class ItemDetailFragment extends DialogFragment {
             shareButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    facebookShare();
+                    facebookShare(title, description, price, obo, location);
                 }
             });
         }
@@ -126,7 +128,7 @@ public class ItemDetailFragment extends DialogFragment {
         return OptionDialog;
     }
 
-    public void setContent(String t, String d, int p, boolean o, String l){
+    public void setContent(String t, String d, double p, boolean o, String l){
         title = t;
         description = d;
         price = p;
@@ -139,7 +141,7 @@ public class ItemDetailFragment extends DialogFragment {
     }
 
 
-    public void facebookShare() {
+    public void facebookShare(String t, String d, double p, boolean o, String l) {
 //        Intent intent = new Intent(Intent.ACTION_SEND);
 //        intent.setType("text/plain");
 //        intent.putExtra(Intent.EXTRA_TEXT, "http://stuffly.herokuapp.com/");
@@ -153,10 +155,25 @@ public class ItemDetailFragment extends DialogFragment {
 //                break;  }}
 //
 //        if(facebookAppFound) {
-//            FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(getActivity())
-//                    .setLink(null)
-//                    .build();
-//            MainActivity.uiHelper.trackPendingDialogCall(shareDialog.present());
+
+            int duration = Toast.LENGTH_LONG;
+            String text = "I posted this for sale:\n\n"
+                    + title + "\n"
+                    + description + "\n\n"
+                    + "for " + f.format(price)
+                    + (obo ? " OBO. " : ". ")
+                    + location + ".";
+            Toast toast = Toast.makeText(getActivity(),"Copied post to clipboard. Paste in Facebook!",duration);
+            toast.show();
+
+            ClipboardManager clipboard = (ClipboardManager)getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Stuffly share", text);
+            clipboard.setPrimaryClip(clip);
+
+            FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(getActivity())
+                    .setLink(null)
+                    .build();
+            MainActivity.uiHelper.trackPendingDialogCall(shareDialog.present());
 //            return;
 //        }
 //
@@ -166,6 +183,7 @@ public class ItemDetailFragment extends DialogFragment {
 //            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sharerUrl));
 //        }
 //        startActivity(intent);
+
 
     }
 }

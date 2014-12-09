@@ -63,8 +63,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     ProfileFragment pf = new ProfileFragment();
     private List<Fragment> fragments;
 
-    //Facebook facebook = new Facebook("1507378456205227");
-    //public static UiLifecycleHelper uiHelper;
+    Facebook facebook = new Facebook("1507378456205227");
+    public static UiLifecycleHelper uiHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -153,27 +153,27 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 //        /**
 //         * Facebook share post
 //         */
-//        uiHelper = new UiLifecycleHelper(this, null);
-//        uiHelper.onCreate(savedInstanceState);
+        uiHelper = new UiLifecycleHelper(this, null);
+        uiHelper.onCreate(savedInstanceState);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-//        facebook.authorizeCallback(requestCode, resultCode, data);
-//
-//        uiHelper.onActivityResult(requestCode, resultCode, data, new FacebookDialog.Callback() {
-//            @Override
-//            public void onError(FacebookDialog.PendingCall pendingCall, Exception error, Bundle data) {
-//                Log.e("Activity", String.format("Error: %s", error.toString()));
-//            }
-//
-//            @Override
-//            public void onComplete(FacebookDialog.PendingCall pendingCall, Bundle data) {
-//                Log.i("Activity", "Success!");
-//            }
-//        });
+        facebook.authorizeCallback(requestCode, resultCode, data);
+
+        uiHelper.onActivityResult(requestCode, resultCode, data, new FacebookDialog.Callback() {
+            @Override
+            public void onError(FacebookDialog.PendingCall pendingCall, Exception error, Bundle data) {
+                Log.e("Activity", String.format("Error: %s", error.toString()));
+            }
+
+            @Override
+            public void onComplete(FacebookDialog.PendingCall pendingCall, Bundle data) {
+                Log.i("Activity", "Success!");
+            }
+        });
     }
 //    @Override
 //    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft)
@@ -259,24 +259,24 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     @Override
     protected void onResume() {
         super.onResume();
-        //uiHelper.onResume();
+        uiHelper.onResume();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        //uiHelper.onSaveInstanceState(outState);
+        uiHelper.onSaveInstanceState(outState);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        //uiHelper.onPause();
+        uiHelper.onPause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //uiHelper.onDestroy();
+        uiHelper.onDestroy();
     }
 }

@@ -150,7 +150,7 @@ public class CreatePostFragment extends DialogFragment {
                 }catch (Exception e){
                     Log.e("error", e.toString());
                 }
-
+                dismiss();
             }
         });
 
