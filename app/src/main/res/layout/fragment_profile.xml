@@ -60,13 +60,14 @@
         android:spinnerMode="dropdown"
         android:focusable="false" />
 
-    <Button
+    <ImageButton
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save Changes"
+        android:layout_height="60dp"
         android:id="@+id/profile_save_button"
         android:layout_gravity="center_horizontal|bottom"
-        android:background="@drawable/button_color" />
+        android:background="@drawable/stuffly_color"
+        android:src="@drawable/ic_action_save"
+        android:layout_marginTop="10dp"/>
 </LinearLayout>
     </ScrollView>
     </RelativeLayout>

@@ -137,12 +137,7 @@
         android:id="@+id/stuff_pic_button"
         android:layout_gravity="center_horizontal"
         android:src="@android:drawable/ic_menu_camera"
-        android:background="@color/Gray" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:background="@drawable/stuffly_color" />
 
         <Button
             android:layout_width="fill_parent"
@@ -150,10 +145,9 @@
             android:text="Stuff It"
             android:id="@+id/stuff_it_button"
             android:textStyle="bold"
-            android:background="@drawable/button_color"
-            android:textSize="18dp" />
-
-    </LinearLayout>
+            android:background="@drawable/button"
+            android:textSize="18dp"
+            android:layout_marginTop="10dp"/>
 
 </LinearLayout>
 </ScrollView>

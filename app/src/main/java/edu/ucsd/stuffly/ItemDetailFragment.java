@@ -203,7 +203,7 @@ public class ItemDetailFragment extends DialogFragment {
                 }
             });
 
-            Button saveButton = (Button) view.findViewById(R.id.item_detail_editable_save_button);
+            ImageButton saveButton = (ImageButton) view.findViewById(R.id.item_detail_editable_save_button);
             saveButton.setOnClickListener(new View.OnClickListener()
             {
                 @Override

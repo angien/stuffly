@@ -51,6 +51,14 @@
             android:textSize="45dp"
             android:gravity="bottom"/>
 
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="23dp"
+            android:text="Posted by "
+            android:id="@+id/item_display_posted_by"
+            android:textSize="18dp"
+            android:gravity="bottom"/>
+
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="200dp"
@@ -106,24 +114,26 @@
                 android:layout_marginTop="10dp">
 
                 <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="32dp"
+                    android:layout_width="140dp"
+                    android:layout_height="40dp"
                     android:text="Off-Campus"
                     android:id="@+id/item_detail_location"
                     android:textSize="24dp"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="1dp"
-                    android:layout_marginRight="5dp" />
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/button"/>
 
                 <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="32dp"
+                    android:layout_width="140dp"
+                    android:layout_height="40dp"
                     android:text="Acceptable"
                     android:id="@+id/item_detail_condition"
                     android:textSize="24dp"
-                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
                     android:padding="1dp"
-                    android:layout_marginLeft="5dp" />
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/button"/>
             </LinearLayout>
 
             <EditText
@@ -140,12 +150,12 @@
             android:gravity="bottom"
             android:minHeight="100dp"/>
 
-            <Button
+            <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="60dp"
-            android:text="Message"
             android:id="@+id/item_detail_message_button"
-            android:background="@drawable/button_color"
+            android:background="@drawable/stuffly_color"
+            android:src="@drawable/ic_action_chat"
             android:layout_marginRight="5dp" />
 
         </LinearLayout>

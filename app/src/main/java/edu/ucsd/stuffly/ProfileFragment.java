@@ -82,7 +82,7 @@ public class ProfileFragment extends Fragment
         il.displayImage("http://test-master-env-ecmnn89sfm.elasticbeanstalk.com.s3-website-us-west-1.amazonaws.com/public/beemo.png",profileEdit);
 
         //save changes
-        Button saveButton = (Button) rootView.findViewById(R.id.profile_save_button);
+        ImageButton saveButton = (ImageButton) rootView.findViewById(R.id.profile_save_button);
         saveButton.setOnClickListener(new OnClickListener()
         {
             @Override
