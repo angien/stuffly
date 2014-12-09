@@ -3,9 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="325dp" android:layout_height="match_parent">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/item_detail_cancel_button"
+            android:src="@drawable/ic_action_back"
+            android:background="@drawable/stuffly_color" />
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:id="@+id/item_detail_top_bar"
+            android:background="@drawable/stuffly_color"/>
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:layout_marginTop="40dp">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
@@ -68,17 +90,36 @@
 
         </LinearLayout>
 
-            <TextView
-                android:layout_width="130dp"
-                android:layout_height="32dp"
-                android:text="Off-Campus"
-                android:id="@+id/item_detail_location"
-                android:textSize="24dp"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:padding="1dp"/>
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp">
 
-        <EditText
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="32dp"
+                    android:text="Off-Campus"
+                    android:id="@+id/item_detail_location"
+                    android:textSize="24dp"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="1dp"
+                    android:layout_marginRight="5dp" />
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="32dp"
+                    android:text="Acceptable"
+                    android:id="@+id/item_detail_condition"
+                    android:textSize="24dp"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="1dp"
+                    android:layout_marginLeft="5dp" />
+            </LinearLayout>
+
+            <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"

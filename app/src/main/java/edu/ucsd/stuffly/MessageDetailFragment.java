@@ -16,6 +16,7 @@ package edu.ucsd.stuffly;
         import android.widget.Button;
         import android.widget.CheckBox;
         import android.widget.EditText;
+        import android.widget.ImageButton;
         import android.widget.Spinner;
         import android.widget.TextView;
         import android.widget.Toast;
@@ -56,9 +57,13 @@ public class MessageDetailFragment extends DialogFragment {
         TextView descriptionView = (TextView) view.findViewById(R.id.message_detail_message_text);
         descriptionView.setText(message);
 
-
-
-
+        ImageButton cancelButton = (ImageButton) view.findViewById(R.id.message_detail_cancel_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
 
         final AlertDialog OptionDialog = builder.create();
 

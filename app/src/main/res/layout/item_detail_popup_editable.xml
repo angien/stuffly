@@ -1,11 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="325dp" android:layout_height="match_parent">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="325dp"
-    android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal"
-    android:padding="10dp"
-    android:id="@+id/item_detail_linear_layout_editable">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/item_detail_editable_cancel_button"
+            android:src="@drawable/ic_action_back"
+            android:background="@drawable/stuffly_color" />
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:id="@+id/item_detail_editable_top_bar"
+            android:background="@drawable/stuffly_color"/>
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:id="@+id/item_detail_editable_delete_button"
+            android:src="@drawable/ic_action_delete"
+            android:background="@drawable/stuffly_color" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="40dp">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="325dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp"
+        android:id="@+id/item_detail_linear_layout_editable">
 
     <EditText
         android:layout_width="fill_parent"
@@ -59,15 +95,39 @@
 
     </LinearLayout>
 
-    <Spinner
-        android:layout_width="130dp"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:id="@+id/item_detail_location_editable"
-        android:textSize="24dp"
-        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal">
+
+        <Spinner
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:id="@+id/item_detail_location_editable"
+            android:textSize="24dp"
+            android:layout_marginTop="10dp"
+            android:spinnerMode="dropdown"
+            android:focusable="false"
+            android:layout_gravity="center_horizontal"/>
+
+        <Spinner
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:id="@+id/item_detail_condition_editable"
+            android:textSize="24dp"
+            android:layout_marginTop="10dp"
+            android:spinnerMode="dropdown"
+            android:focusable="false"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/item_detail_category_editable"
+        android:layout_gravity="center_horizontal"
         android:spinnerMode="dropdown"
-        android:focusable="false"
-        android:layout_gravity="center_horizontal"/>
+        android:gravity="center_horizontal" />
 
     <Button
         android:layout_width="fill_parent"
@@ -78,28 +138,14 @@
         android:textColor="#FFFFFF"
         android:layout_marginTop="10dp"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp">
-
         <Button
-            android:layout_width="100dp"
+            android:layout_width="fill_parent"
             android:layout_height="60dp"
             android:text="Save"
             android:id="@+id/item_detail_editable_save_button"
             android:background="@drawable/button_color"
             android:layout_marginRight="5dp" />
 
-        <Button
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:text="Delete"
-            android:id="@+id/item_detail_editable_delete_button"
-            android:background="@drawable/button_color"
-            android:layout_marginLeft="5dp" />
     </LinearLayout>
-
-</LinearLayout>
+    </ScrollView>
+    </RelativeLayout>

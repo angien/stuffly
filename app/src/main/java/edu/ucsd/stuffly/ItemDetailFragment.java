@@ -25,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -98,6 +99,14 @@ public class ItemDetailFragment extends DialogFragment {
 //                    facebookShare(title, description, price, obo, location);
 //                }
 //            });
+
+            ImageButton cancelButton = (ImageButton) view.findViewById(R.id.item_detail_cancel_button);
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismiss();
+                }
+            });
         }else{
             View view = inflater.inflate(R.layout.item_detail_popup_editable, null);
 
@@ -127,6 +136,14 @@ public class ItemDetailFragment extends DialogFragment {
                 @Override
                 public void onClick(View view) {
                     facebookShare(title, description, price, obo, location);
+                }
+            });
+
+            ImageButton cancelButton = (ImageButton) view.findViewById(R.id.item_detail_editable_cancel_button);
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismiss();
                 }
             });
         }
