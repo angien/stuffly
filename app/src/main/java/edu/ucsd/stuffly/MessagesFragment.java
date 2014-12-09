@@ -48,14 +48,14 @@ public class MessagesFragment extends Fragment
     {
         MyHttpRequests rtaskget = new MyHttpRequests();
         try{
-            rtaskget.execute("/api/post/","GET");
+            rtaskget.execute("/api/user/" + UserID.getUserId() + "/messages" ,"GET");
             JSONArray feed = new JSONArray(rtaskget.get());
 
             for(int i = 0; i < feed.length(); i++)
             {
-                text1.add(i,feed.getJSONObject(i).getString("title"));
-                text2.add(i,feed.getJSONObject(i).getString("description"));
-                text3.add(i,feed.getJSONObject(i).getString("condition"));
+                text1.add(i,feed.getJSONObject(i).getString("from_id"));
+                text2.add(i,feed.getJSONObject(i).getString("date"));
+                text3.add(i,feed.getJSONObject(i).getString("message"));
                 json.add(i,feed.getJSONObject(i));
 
                 Log.i("STUFFFFFF url", text1.get(i));
