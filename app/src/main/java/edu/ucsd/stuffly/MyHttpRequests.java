@@ -10,6 +10,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -91,7 +92,7 @@ public class MyHttpRequests extends AsyncTask<String, Integer, String> {
                 Log.e("MyHttpRequests POST", e.toString());
             }
         }
-        else{//PUT
+        else if (params[1].equals("PUT")){//PUT
             // Create a new HttpClient and Post Header
 
             HttpClient httpclient = new DefaultHttpClient();
@@ -130,6 +131,30 @@ public class MyHttpRequests extends AsyncTask<String, Integer, String> {
 
 
 
+        }
+        else {
+            // Create a new HttpClient and Post Header
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpDelete httpDelete = new HttpDelete(serverURL);
+            try{
+                httpDelete.setHeader("Content-type","application/json");
+                Log.i("httpput", httpDelete.toString());
+
+                HttpResponse response = httpclient.execute(httpDelete);
+                StatusLine statusLine = response.getStatusLine();
+                int statusCode = statusLine.getStatusCode();
+                if(statusCode == 200){
+                    Log.i("cool", "cool");
+                } else {
+                    Log.e(MainActivity.class.toString(), "Failed to DELETE JSON object");
+                }
+                return "true";
+            }catch(ClientProtocolException e){
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return "false";
 

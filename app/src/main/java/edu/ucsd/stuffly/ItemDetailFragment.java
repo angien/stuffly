@@ -73,7 +73,7 @@ public class ItemDetailFragment extends DialogFragment {
 
         ImageLoader il = ImageLoader.getInstance();
 
-        if(!self) {
+        if(!self) { // not your own!
             View view = inflater.inflate(R.layout.item_detail_popup, null);
 
             builder.setView(view);
@@ -113,15 +113,7 @@ public class ItemDetailFragment extends DialogFragment {
             });
 
 
-            ImageButton deleteButton = (ImageButton) view.findViewById(R.id.item_detail_editable_delete_button);
-            deleteButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MyHttpRequests a = new MyHttpRequests();
-                    a.execute("/api/post/" + postId, "DELETE");
-                    dismiss();
-                }
-            });
+
 
         }else{
             View view = inflater.inflate(R.layout.item_detail_popup_editable, null);
@@ -163,6 +155,16 @@ public class ItemDetailFragment extends DialogFragment {
             cancelButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    dismiss();
+                }
+            });
+
+            ImageButton deleteButton = (ImageButton) view.findViewById(R.id.item_detail_editable_delete_button);
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MyHttpRequests a = new MyHttpRequests();
+                    a.execute("/api/post/" + postId, "DELETE");
                     dismiss();
                 }
             });
