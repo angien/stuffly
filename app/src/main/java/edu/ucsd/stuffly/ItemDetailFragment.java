@@ -116,7 +116,7 @@ public class ItemDetailFragment extends DialogFragment {
 
             newMessage = (EditText) view.findViewById(R.id.item_detail_message_text);
 
-            Button messageButton = (Button) view.findViewById(R.id.item_detail_message_button);
+            ImageButton messageButton = (ImageButton) view.findViewById(R.id.item_detail_message_button);
             messageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

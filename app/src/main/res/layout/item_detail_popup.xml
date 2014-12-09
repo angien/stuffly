@@ -108,8 +108,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="50dp"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="10dp">
 
