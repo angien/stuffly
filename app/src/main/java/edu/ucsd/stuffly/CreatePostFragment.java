@@ -108,6 +108,13 @@ public class CreatePostFragment extends DialogFragment {
         cond_spinner.setAdapter(cond_adapter);
 
         preview = (ImageView)view.findViewById(R.id.stuff_pic);
+        preview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("error", "IMAGE VIEW");
+            }
+        });
+
 
         img_btn = (ImageButton)view.findViewById(R.id.stuff_pic_button);
         img_btn.setOnClickListener(new View.OnClickListener() {
