@@ -32,6 +32,7 @@ public class MessagesArrayAdapter extends ArrayAdapter<String> {
 
     public ArrayList<String> messages_textview1_text;
     public ArrayList<String> messages_textview2_text;
+    public ArrayList<String> messages_textview3_text;
     public ArrayList<JSONObject> messages_json;
     public Image[] messages_imageview_image;
 
@@ -42,6 +43,7 @@ public class MessagesArrayAdapter extends ArrayAdapter<String> {
         this.context = context;
         this.messages_textview1_text = text1;
         this.messages_textview2_text = text2;
+        this.messages_textview3_text = text3;
         this.messages_json =json;
         //this.messages_imageview_image = image;
     }
@@ -59,33 +61,21 @@ public class MessagesArrayAdapter extends ArrayAdapter<String> {
                 Context context = getContext();
                 View root = ((Activity)context).getWindow().getDecorView().findViewById(android.R.id.content);
                 String text;
-                String title = "";
-                String description = "";
-                int price = 0;
-                boolean obo = false;
-                String location = "";
+                String message;
+                String date = "";
+                String from_id = "";
 
                 try {
                     Log.e("GET VIEW ID USER", UserID.id);
                     text = messages_json.get(position).toString();
-                    title = messages_json.get(position).getString("title");
-                    description = messages_json.get(position).getString("description");
-                    price = messages_json.get(position).getInt("price");
-                    obo = messages_json.get(position).getBoolean("obo");
-                    location = messages_json.get(position).getString("location");
+                    message = messages_json.get(position).getString("message");
+                    date = messages_json.get(position).getString("date");
+                    from_id = messages_json.get(position).getString("from_id");
 
-                    ItemDetailFragment idf = new ItemDetailFragment();
+                    MessageDetailFragment mdf = new MessageDetailFragment();
 
-                    idf.setContent(title,description, price,obo,location);
-
-                    if ((UserID.id).equals(messages_json.get(position).getString("user"))) {
-                        text = "MATCHES!!!";
-                        idf.setSelf(true);
-                    }
-                    else {
-                        idf.setSelf(false);
-                    }
-                    idf.show(((FragmentActivity) context).getSupportFragmentManager(), "itemDetail" + position);
+                    mdf.setContent(from_id, date, message);
+                    mdf.show(((FragmentActivity) context).getSupportFragmentManager(), "itemDetail" + position);
                 }
                 catch (Exception e) {
                     text = e.toString();
@@ -99,16 +89,17 @@ public class MessagesArrayAdapter extends ArrayAdapter<String> {
 
         //int imageId = getContext().getResources().getDrawable(R.id.app_logo);
 
-        TextView messages_textview1 = (TextView) rowView.findViewById(R.id.messages_cell_title);
+        TextView messages_textview1 = (TextView) rowView.findViewById(R.id.messages_cell_name);
         messages_textview1.setText(this.messages_textview1_text.get(position));
 
-        TextView messages_textview2 = (TextView) rowView.findViewById(R.id.messages_cell_description);
+        TextView messages_textview2 = (TextView) rowView.findViewById(R.id.messages_cell_date);
         messages_textview2.setText(this.messages_textview2_text.get(position));
+
+        TextView messages_textview3 = (TextView) rowView.findViewById(R.id.messages_cell_message);
+        messages_textview3.setText(this.messages_textview3_text.get(position));
 
         //ImageView messages_imageview = (ImageView) rowView.findViewById(R.id.messages_imageview);
         //messages_imageview.setImageResource(R.drawable.app_logo);
-
-
 
         return rowView;
     }

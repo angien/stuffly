@@ -11,7 +11,10 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="32dp">
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp">
 
             <TextView
                 android:layout_width="100dp"
@@ -19,7 +22,8 @@
                 android:text="From"
                 android:id="@+id/message_detail_from_label"
                 android:textSize="24dp"
-                android:gravity="bottom" />
+                android:gravity="bottom"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -33,8 +37,35 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:text="Date"
+                android:id="@+id/message_detail_date_label"
+                android:textSize="24dp"
+                android:gravity="bottom"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:id="@+id/message_detail_date"
+                android:layout_marginLeft="10dp"
+                android:textSize="30dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="250dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp">
 
             <TextView
                 android:layout_width="100dp"
@@ -42,25 +73,31 @@
                 android:text="Message"
                 android:id="@+id/message_detai_message_label"
                 android:textSize="24dp"
-                android:maxHeight="500dp" />
+                android:maxHeight="500dp"
+                android:textStyle="bold" />
             <ScrollView
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp">
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="Their message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message\nTheir message"
                     android:id="@+id/message_detail_message_text"
                     android:textSize="20dp"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="10dp"
+                    android:requiresFadingEdge="vertical"
+                    android:fadingEdgeLength="50dp"/>
             </ScrollView>
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="10dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
             <TextView
                 android:layout_width="100dp"
@@ -68,7 +105,8 @@
                 android:text="Reply"
                 android:id="@+id/message_detail_reply_label"
                 android:textSize="24dp"
-                android:maxHeight="500dp" />
+                android:maxHeight="500dp"
+                android:textStyle="bold" />
 
             <ScrollView
                 android:layout_width="fill_parent"
@@ -89,14 +127,16 @@
             </ScrollView>
         </LinearLayout>
 
-        <Button
+        <ImageButton
             android:layout_width="fill_parent"
             android:layout_height="60dp"
-            android:text="Reply"
             android:id="@+id/message_detail_send_button"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/button_color"
-            android:layout_marginTop="10dp"/>
+            android:background="@drawable/stuffly_color"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic_action_back" />
     </LinearLayout>
 
 </RelativeLayout>

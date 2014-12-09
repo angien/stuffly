@@ -29,6 +29,7 @@ public class MyItemsFragment extends Fragment
 
     private ArrayList<String> text1;
     private ArrayList<String> text2;
+    private ArrayList<String> ImageUrls;
     private ArrayList<JSONObject> json;
 
     @Override
@@ -40,10 +41,7 @@ public class MyItemsFragment extends Fragment
         text1 = new ArrayList<String>();
         text2 = new ArrayList<String>();
         json = new ArrayList<JSONObject>();
-
-
-
-
+        ImageUrls = new ArrayList<String>();
 
         //spinner for choosing my stuff and my bids
         spinner = (Spinner) rootView.findViewById(R.id.myItemSpinner);
@@ -55,58 +53,6 @@ public class MyItemsFragment extends Fragment
         return rootView;
     }
 
-    @Override
-    public void onAttach (Activity a) {
-
-//        int pos = spinner.getSelectedItemPosition();
-//        if (pos == 0) {
-//            try {
-//
-//                JSONArray postArray = new JSONArray(new MyHttpRequests().execute("/api/user/" + UserID.id + "/posts", "GET").get());
-//
-//                for (int i = 0; i < postArray.length(); i++) {
-//
-//                    text1.add(i, postArray.getJSONObject(i).getString("title"));
-//                    text2.add(i, postArray.getJSONObject(i).getString("description"));
-//                    json.add(i, postArray.getJSONObject(i));
-//
-//                }
-//
-//
-//            } catch (Exception e) {
-//                Log.e("MYITEMS GET2", e.toString());
-//
-//            }
-//        }
-//        else {
-//            Log.e("SPINNER MOVED", "asdf");
-//
-//            try {
-//
-//                //JSONObject userInfo = new JSONObject(new MyHttpRequests().execute("/api/user/" + id, "GET").get());
-//                //JSONArray postIDarray = userInfo.getJSONArray("posts");
-//
-//
-//                for (int i = 0; i < 10; i++) {
-//                    //JSONObject postContent = new JSONObject(new MyHttpRequests().execute("/api/post/" + postIDarray.getString(i), "GET").get());
-//                    text1.add(i, "whatever");
-//                    text2.add(i, "whatever");
-//                    //text1[i] = "text1: " + Integer.toString(i);
-//                    //text2[i] = "text2: " + Integer.toString(i);
-//                    json.add(i, new JSONObject());
-//                    Log.e("MY ITEMS", text1.get(i));
-//                }
-//
-//
-//            } catch (Exception e) {
-//                Log.e("MYITEMS GET2", e.toString());
-//            }
-//
-//        }
-//        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, json);
-//        myItemsListView.setAdapter(arrayAdapter);
-        super.onAttach(a);
-    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState)
@@ -115,7 +61,7 @@ public class MyItemsFragment extends Fragment
 */
         items_list = new ArrayList<String>();
         myItemsListView = (ListView) getActivity().findViewById(R.id.myItemslistView);
-        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, json);
+        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2,ImageUrls,json);
         myItemsListView.setAdapter(arrayAdapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -125,6 +71,7 @@ public class MyItemsFragment extends Fragment
 
                 text1 = new ArrayList<String>();
                 text2 = new ArrayList<String>();
+                ImageUrls = new ArrayList<String>();
                 json = new ArrayList<JSONObject>();
 
                 if (item.toString().equals("My Items")) {
@@ -136,6 +83,7 @@ public class MyItemsFragment extends Fragment
 
                             text1.add(i, postArray.getJSONObject(i).getString("title"));
                             text2.add(i, postArray.getJSONObject(i).getString("description"));
+                            ImageUrls.add(i, postArray.getJSONObject(i).optString("imageUrl", "http://i.imgur.com/RWLVSt0.png"));
                             json.add(i, postArray.getJSONObject(i));
 
                         }
@@ -161,6 +109,7 @@ public class MyItemsFragment extends Fragment
                             text2.add(i, "whatever");
                             //text1[i] = "text1: " + Integer.toString(i);
                             //text2[i] = "text2: " + Integer.toString(i);
+                            ImageUrls.add(i, "http://i.imgur.com/RWLVSt0.png");
                             json.add(i, new JSONObject());
                             Log.e("MY ITEMS", text1.get(i));
                         }
@@ -171,7 +120,7 @@ public class MyItemsFragment extends Fragment
                     }
 
                 }
-                arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, json);
+                arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, ImageUrls, json);
                 myItemsListView.setAdapter(arrayAdapter);
 
 

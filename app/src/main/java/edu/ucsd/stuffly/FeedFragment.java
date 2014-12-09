@@ -25,6 +25,7 @@ public class FeedFragment extends Fragment
 
     private ArrayList<String> text1;
     private ArrayList<String> text2;
+    private ArrayList<String> ImageUrls;
     private ArrayList<JSONObject> json;
 
     @Override
@@ -34,6 +35,8 @@ public class FeedFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_feed, container, false);
         text1 = new ArrayList<String>();
         text2 = new ArrayList<String>();
+        ImageUrls = new ArrayList<String>();
+
         json = new ArrayList<JSONObject>();
 
 
@@ -54,6 +57,7 @@ public class FeedFragment extends Fragment
             {
                 text1.add(i,feed.getJSONObject(i).getString("title"));
                 text2.add(i,feed.getJSONObject(i).getString("description"));
+                ImageUrls.add(i, feed.getJSONObject(i).optString("imageUrl", "http://i.imgur.com/RWLVSt0.png"));
                 json.add(i,feed.getJSONObject(i));
 
                 Log.i("STUFFFFFF url", text1.get(i));
@@ -69,7 +73,7 @@ public class FeedFragment extends Fragment
 
         feed_list = new ArrayList<String>();
         listview_feed = (ListView) getActivity().findViewById(R.id.listview_feed);
-        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, json);
+        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, ImageUrls, json);
         listview_feed.setAdapter(arrayAdapter);
 
 //        // allow action when clicking on listview's cell
@@ -86,35 +90,4 @@ public class FeedFragment extends Fragment
 //
 //        });
     }
-
-    public void refresh(){
-        MyHttpRequests rtaskget = new MyHttpRequests();
-        try{
-            rtaskget.execute("/api/post/","GET");
-            JSONArray feed = new JSONArray(rtaskget.get());
-
-            for(int i = 0; i < feed.length(); i++)
-            {
-                text1.add(i,feed.getJSONObject(i).getString("title"));
-                text2.add(i,feed.getJSONObject(i).getString("description"));
-                json.add(i,feed.getJSONObject(i));
-
-                Log.i("STUFFFFFF url", text1.get(i));
-                //text1[i] = "text1: " + Integer.toString(i);
-                //text2[i] = "text2: " + Integer.toString(i);
-            }
-
-
-        }catch(Exception e){
-            Log.e("FeedFragment GET", "treat yo self");
-        }
-
-
-        feed_list = new ArrayList<String>();
-        listview_feed = (ListView) getActivity().findViewById(R.id.listview_feed);
-        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, json);
-        listview_feed.setAdapter(arrayAdapter);
-    }
-
-
 }

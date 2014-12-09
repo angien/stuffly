@@ -35,7 +35,9 @@
             android:textSize="16dp"
             android:maxHeight="120dp"
             android:layout_marginTop="10dp"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:requiresFadingEdge="vertical"
+            android:fadingEdgeLength="50dp"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -89,15 +91,6 @@
             android:enabled="true"
             android:gravity="bottom"
             android:minHeight="100dp"/>
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:text="Share"
-                android:id="@+id/item_detail_facebook_button"
-                android:background="@drawable/facebook_color"
-                android:textColor="#FFFFFF"
-                android:layout_marginTop="10dp"/>
 
             <Button
             android:layout_width="fill_parent"
