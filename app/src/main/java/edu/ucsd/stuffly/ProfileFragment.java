@@ -95,7 +95,7 @@ public class ProfileFragment extends Fragment
         spinner.setAdapter(adapter);
 
         profileImg = (ImageView) rootView.findViewById(R.id.profile_pic);
-        final Button profileImgEdit = (Button) rootView.findViewById(R.id.edit_profile_img_btn);
+        final ImageButton profileImgEdit = (ImageButton) rootView.findViewById(R.id.edit_profile_img_btn);
         profileImgEdit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
