@@ -45,7 +45,7 @@ public class ProfileFragment extends Fragment
 
     File photoFile;
     String mCurrentPhotoPath;
-    String image_url;
+    String image_url = "http://i.imgur.com/RWLVSt0.png";
 
     ImageView profileImg;
     @Override
@@ -57,12 +57,11 @@ public class ProfileFragment extends Fragment
         final TextView lastnameField = (TextView) rootView.findViewById(R.id.profile_last_name);
         final TextView emailField = (TextView) rootView.findViewById(R.id.profile_email);
         final TextView passwordField = (TextView) rootView.findViewById(R.id.profile_password);
+        profileImg = (ImageView) rootView.findViewById(R.id.profile_pic);
         MyHttpRequests rtaskget = new MyHttpRequests();
         String id = UserID.id;
 
         ImageLoader il = ImageLoader.getInstance();
-
-        image_url = "default";
         try{
             //rtaskget.execute("/api/user/" + id,"GET");
             JSONObject userInfo = new JSONObject(rtaskget.execute("/api/user/" + id,"GET").get());
@@ -72,6 +71,7 @@ public class ProfileFragment extends Fragment
             password = userInfo.getString("password");
             firstName = userInfo.getString("firstname");
             lastName = userInfo.getString("lastname");
+            image_url = userInfo.optString("imageUrl","http://i.imgur.com/RWLVSt0.png");
             //Log.i("STUFFFFFF url", "wat" + feed.get(i));
 
         }
@@ -87,6 +87,9 @@ public class ProfileFragment extends Fragment
         emailField.setText(email);
         passwordField.setText(password);
 
+        profileImg = (ImageView) rootView.findViewById(R.id.profile_pic);
+        il.displayImage(image_url,profileImg);
+
         //on-campus or off-campus
         Spinner spinner = (Spinner) rootView.findViewById(R.id.profile_location_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getBaseContext(),
@@ -94,7 +97,6 @@ public class ProfileFragment extends Fragment
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        profileImg = (ImageView) rootView.findViewById(R.id.profile_pic);
         final ImageButton profileImgEdit = (ImageButton) rootView.findViewById(R.id.edit_profile_img_btn);
         profileImgEdit.setOnClickListener(new OnClickListener() {
             @Override
@@ -136,9 +138,7 @@ public class ProfileFragment extends Fragment
                     json.put("email", emailField.getText().toString());
                     json.put("lastname", lastnameField.getText().toString());
                     json.put("firstname", firstnameField.getText().toString());
-                    if(image_url.equals("default")){
-                        image_url = "http://test-master-env-ecmnn89sfm.elasticbeanstalk.com.s3-website-us-west-1.amazonaws.com/public/beemo.png";
-                    }
+
                     json.put("imageUrl", image_url);
                     //String ret = new MyHttpRequests().execute("/api/user/" + UserID.id, "PUT",
                     //       "{'password':'" + passwordField.getText().toString() + "', 'email':'" + emailField.getText().toString() + "','lastname':'" + lastnameField.getText().toString() + "', 'firstname':'" + firstnameField.getText().toString() +"'}").get();
