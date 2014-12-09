@@ -35,8 +35,8 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
     public ArrayList<String> feed_textview1_text;
     public ArrayList<String> feed_textview2_text;
     public ArrayList<JSONObject> feed_json;
+    public Image[] feed_imageview_image;
     public ArrayList<String> ImageUrls;
-
     ImageLoader il = ImageLoader.getInstance();
 
 
@@ -68,10 +68,12 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
                 int price = 0;
                 boolean obo = false;
                 String location = "";
+                String id ="";
                 String picURL = "";
 
                 try {
                     Log.e("GET VIEW ID USER", UserID.id);
+                    id = feed_json.get(position).getString("_id");
                     text = feed_json.get(position).toString();
                     title = feed_json.get(position).getString("title");
                     description = feed_json.get(position).getString("description");
@@ -82,7 +84,7 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
 
                     ItemDetailFragment idf = new ItemDetailFragment();
 
-                    idf.setContent(title,description, price,obo,location,picURL);
+                    idf.setContent(id,title,description, price,obo,location, picURL);
 
                     if ((UserID.id).equals(feed_json.get(position).getString("user"))) {
                         text = "MATCHES!!!";

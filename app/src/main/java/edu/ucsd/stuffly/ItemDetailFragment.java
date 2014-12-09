@@ -39,6 +39,8 @@ import com.facebook.widget.FacebookDialog;
 import com.facebook.widget.WebDialog;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import org.json.JSONObject;
+
 import java.text.NumberFormat;
 import java.util.List;
 
@@ -48,6 +50,7 @@ import java.util.List;
  *
  */
 public class ItemDetailFragment extends DialogFragment {
+    String postId = "";
     String title = "";
     String description = "";
     double price = 0;
@@ -57,6 +60,7 @@ public class ItemDetailFragment extends DialogFragment {
     boolean self = false;
     String picURL = "";
     NumberFormat f = NumberFormat.getCurrencyInstance();
+    JSONObject put_json;
 
     public ItemDetailFragment() {
         // Required empty public constructor
@@ -109,22 +113,22 @@ public class ItemDetailFragment extends DialogFragment {
             });
         }else{
             View view = inflater.inflate(R.layout.item_detail_popup_editable, null);
-
+            put_json = new JSONObject();
             builder.setView(view);
 
-            EditText titleEdit = (EditText) view.findViewById(R.id.item_detail_title_editable);
+            final EditText titleEdit = (EditText) view.findViewById(R.id.item_detail_title_editable);
             titleEdit.setText(title);
 
-            EditText descriptionEdit = (EditText) view.findViewById(R.id.item_detail_description_editable);
+            final EditText descriptionEdit = (EditText) view.findViewById(R.id.item_detail_description_editable);
             descriptionEdit.setText(description);
 
-            EditText priceEdit = (EditText) view.findViewById(R.id.item_detail_price_editable);
+            final EditText priceEdit = (EditText) view.findViewById(R.id.item_detail_price_editable);
             priceEdit.setText(f.format(price));
 
-            CheckBox oboEdit = (CheckBox) view.findViewById(R.id.item_detail_obo_editable);
+            final CheckBox oboEdit = (CheckBox) view.findViewById(R.id.item_detail_obo_editable);
             oboEdit.setChecked(obo);
 
-            Spinner locationEdit = (Spinner) view.findViewById(R.id.item_detail_location_editable);
+            final Spinner locationEdit = (Spinner) view.findViewById(R.id.item_detail_location_editable);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getBaseContext(),
             R.array.locations_array, android.R.layout.simple_spinner_dropdown_item);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -139,10 +143,45 @@ public class ItemDetailFragment extends DialogFragment {
                 }
             });
 
+
             ImageButton cancelButton = (ImageButton) view.findViewById(R.id.item_detail_editable_cancel_button);
-            cancelButton.setOnClickListener(new View.OnClickListener() {
+            cancelButton.setOnClickListener(new View.OnClickListener()
+            {
                 @Override
                 public void onClick(View view) {
+                    dismiss();
+                }
+            });
+
+            Button saveButton = (Button) view.findViewById(R.id.item_detail_editable_save_button);
+            saveButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    try{
+                        put_json.put("user", UserID.getUserId());
+                        put_json.put("title", titleEdit.getText().toString());
+                        put_json.put("description", descriptionEdit.getText().toString());
+                        put_json.put("price", Double.parseDouble(priceEdit.getText().toString().substring(1)));
+                        put_json.put("category", "Electronics");
+                        put_json.put("location", locationEdit.getSelectedItem().toString());
+                        put_json.put("condition", "Acceptable");
+                        put_json.put("obo", Boolean.toString(oboEdit.isChecked()));
+                        Log.e("JSON", put_json.toString());
+                    } catch(Exception e){
+                        Log.e("ItemDetailFragment PUT", e.toString());
+                    }
+
+                    MyHttpRequests a = new MyHttpRequests();
+                    a.execute("/api/post/" + postId, "PUT", put_json.toString());
+                    try {
+                        String ab = a.get();
+                        Log.e("a.get()", ab);
+
+                    }catch (Exception e){
+                        Log.e("error", e.toString());
+                    }
                     dismiss();
                 }
             });
@@ -153,7 +192,7 @@ public class ItemDetailFragment extends DialogFragment {
         return OptionDialog;
     }
 
-    public void setContent(String t, String d, double p, boolean o, String l, String u){
+    public void setContent(String id, String t, String d, double p, boolean o, String l, String u){
         title = t;
         description = d;
         price = p;
