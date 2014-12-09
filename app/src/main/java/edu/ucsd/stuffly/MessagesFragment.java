@@ -26,7 +26,6 @@ public class MessagesFragment extends Fragment
 
     private ArrayList<String> text1;
     private ArrayList<String> text2;
-    private ArrayList<String> text3;
     private ArrayList<JSONObject> json;
 
     @Override
@@ -36,7 +35,6 @@ public class MessagesFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_messages, container, false);
         text1 = new ArrayList<String>();
         text2 = new ArrayList<String>();
-        text3 = new ArrayList<String>();
         json = new ArrayList<JSONObject>();
 
 
@@ -53,10 +51,9 @@ public class MessagesFragment extends Fragment
 
             for(int i = 0; i < feed.length(); i++)
             {
-                text1.add(i,feed.getJSONObject(i).getString("from_id"));
-                text2.add(i,feed.getJSONObject(i).getString("date"));
-                text3.add(i,feed.getJSONObject(i).getString("message"));
-                json.add(i,feed.getJSONObject(i));
+                text1.add(i,feed.getJSONObject(i).getString("date"));
+                text2.add(i,feed.getJSONObject(i).getString("message"));
+                json.add(i,new JSONObject(new MyHttpRequests().execute("/api/user/" + feed.getJSONObject(i).getString("from_id"), "GET").get()));
 
                 Log.i("STUFFFFFF url", text1.get(i));
                 //text1[i] = "text1: " + Integer.toString(i);
@@ -71,7 +68,7 @@ public class MessagesFragment extends Fragment
 
         messages_list = new ArrayList<String>();
         listview_messages = (ListView) getActivity().findViewById(R.id.listview_messages);
-        arrayAdapter = new MessagesArrayAdapter(getActivity(), text1, text2, text3, json);
+        arrayAdapter = new MessagesArrayAdapter(getActivity(), text1, text2, json);
         listview_messages.setAdapter(arrayAdapter);
 
 
