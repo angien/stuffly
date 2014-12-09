@@ -319,7 +319,7 @@ public class ItemDetailFragment extends DialogFragment {
 //        if(facebookAppFound) {
 
             int duration = Toast.LENGTH_LONG;
-            String text = "I posted this for sale:\n\n"
+            String text = "I posted this for sale on Stuffly:\n\n"
                     + title + "\n"
                     + description + "\n\n"
                     + "for " + f.format(price)
@@ -333,7 +333,12 @@ public class ItemDetailFragment extends DialogFragment {
             clipboard.setPrimaryClip(clip);
 
             FacebookDialog shareDialog = new FacebookDialog.ShareDialogBuilder(getActivity())
-                    .setLink(null)
+                    .setLink(picURL)
+                    .setName(title)
+                    .setDescription(description + "\n\n"
+                            + f.format(price)
+                            + (obo ? " OBO. " : ". ")
+                            + location + ".")
                     .build();
             MainActivity.uiHelper.trackPendingDialogCall(shareDialog.present());
 //            return;
