@@ -51,6 +51,7 @@ import java.util.List;
  */
 public class ItemDetailFragment extends DialogFragment {
     String postId = "";
+    String posterId = "";
     String title = "";
     String description = "";
     double price = 0;
@@ -61,6 +62,7 @@ public class ItemDetailFragment extends DialogFragment {
     String picURL = "";
     NumberFormat f = NumberFormat.getCurrencyInstance();
     JSONObject put_json;
+    EditText newMessage;
 
     public ItemDetailFragment() {
         // Required empty public constructor
@@ -109,6 +111,38 @@ public class ItemDetailFragment extends DialogFragment {
                 @Override
                 public void onClick(View view) {
                     dismiss();
+                }
+            });
+
+            newMessage = (EditText) view.findViewById(R.id.item_detail_message_text);
+
+            Button messageButton = (Button) view.findViewById(R.id.item_detail_message_button);
+            messageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    JSONObject post_json = new JSONObject();
+                    try {
+                        post_json.put("to_id", posterId);
+                        post_json.put("from_id", UserID.getUserId());
+                        post_json.put("message", newMessage.getText().toString());
+                    }catch(Exception e){
+                        Log.e("create post", "json error");
+                    }
+
+                    Log.e("post_json", post_json.toString());
+                    MyHttpRequests a = new MyHttpRequests();
+                    a.execute("/api/message", "POST", post_json.toString());
+                    try {
+                        String ab = a.get();
+                        Log.e("message reply .get()", ab);
+
+                    }catch (Exception e){
+                        Log.e("error", e.toString());
+                    }
+                    dismiss();
+                    // toast saying that it sent?
+                    dismiss();
+
                 }
             });
 
@@ -208,8 +242,9 @@ public class ItemDetailFragment extends DialogFragment {
         return OptionDialog;
     }
 
-    public void setContent(String id, String t, String d, double p, boolean o, String l, String u){
+    public void setContent(String id, String poster_id, String t, String d, double p, boolean o, String l, String u){
         postId = id;
+        posterId = poster_id;
         title = t;
         description = d;
         price = p;
