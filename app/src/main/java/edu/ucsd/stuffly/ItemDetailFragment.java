@@ -68,6 +68,9 @@ public class ItemDetailFragment extends DialogFragment {
     JSONObject put_json;
     EditText newMessage;
 
+    Spinner loc_spinner;
+    Spinner cat_spinner;
+    Spinner cond_spinner;
     public ItemDetailFragment() {
         // Required empty public constructor
     }
@@ -216,6 +219,20 @@ public class ItemDetailFragment extends DialogFragment {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             locationEdit.setAdapter(adapter);
             locationEdit.setSelection(adapter.getPosition(location));
+
+            final Spinner categoryEdit = (Spinner) view.findViewById(R.id.item_detail_category_editable);
+            ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity().getBaseContext(),
+                    R.array.category_array, android.R.layout.simple_spinner_dropdown_item);
+            adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            categoryEdit.setAdapter(adapter2);
+            categoryEdit.setSelection(adapter2.getPosition(location));
+
+            final Spinner conditionEdit = (Spinner) view.findViewById(R.id.item_detail_condition_editable);
+            ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(getActivity().getBaseContext(),
+                    R.array.condition_array, android.R.layout.simple_spinner_dropdown_item);
+            adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            conditionEdit.setAdapter(adapter3);
+            conditionEdit.setSelection(adapter3.getPosition(location));
 
             Button shareButton = (Button) view.findViewById(R.id.item_detail_editable_facebook_button);
             shareButton.setOnClickListener(new View.OnClickListener() {
