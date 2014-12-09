@@ -212,6 +212,7 @@ public class ItemDetailFragment extends DialogFragment {
                     try{
                         put_json.put("user", UserID.getUserId());
                         put_json.put("title", titleEdit.getText().toString());
+                        put_json.put("imageURL", picURL);
                         put_json.put("description", descriptionEdit.getText().toString());
                         put_json.put("price", Double.parseDouble(priceEdit.getText().toString().substring(1)));
                         put_json.put("category", "Electronics");
