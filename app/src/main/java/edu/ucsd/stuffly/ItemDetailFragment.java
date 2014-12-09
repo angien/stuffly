@@ -140,6 +140,9 @@ public class ItemDetailFragment extends DialogFragment {
             final CheckBox oboEdit = (CheckBox) view.findViewById(R.id.item_detail_obo_editable);
             oboEdit.setChecked(obo);
 
+            final ImageView imageViewEdit = (ImageView) view.findViewById(R.id.item_detail_pic_editable);
+            il.displayImage(picURL,imageViewEdit);
+
             final Spinner locationEdit = (Spinner) view.findViewById(R.id.item_detail_location_editable);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getBaseContext(),
             R.array.locations_array, android.R.layout.simple_spinner_dropdown_item);
