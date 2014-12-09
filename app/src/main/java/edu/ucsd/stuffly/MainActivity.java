@@ -40,6 +40,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.ucsd.stuffly.R;
@@ -56,6 +57,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     // Tab titles
     private String[] tabs = { "Feed", "Messages", "My Items", "Profile" };
 
+    MessagesFragment mf = new MessagesFragment();
+    FeedFragment ff = new FeedFragment();
+    MyItemsFragment mif = new MyItemsFragment();
+    ProfileFragment pf = new ProfileFragment();
+    private List<Fragment> fragments;
+
     //Facebook facebook = new Facebook("1507378456205227");
     //public static UiLifecycleHelper uiHelper;
 
@@ -68,7 +75,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         // Initialization
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
-        mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+
+        fragments = new ArrayList<Fragment>();
+        fragments.add(ff);
+        fragments.add(mf);
+        fragments.add(mif);
+        fragments.add(pf);
+        mAdapter = new TabsPagerAdapter(getSupportFragmentManager(),fragments);
 
         viewPager.setAdapter(mAdapter);
         viewPager.setOffscreenPageLimit(4); // make sure this is the amount of tabs available...otherwise memory leak
@@ -194,7 +207,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 return true;
             case R.id.refresh:
                 //final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-
+                mAdapter.notifyDataSetChanged();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
