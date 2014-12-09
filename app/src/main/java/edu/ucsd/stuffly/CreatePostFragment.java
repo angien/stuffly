@@ -29,12 +29,16 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CreatePostFragment extends DialogFragment {
 
@@ -49,9 +53,15 @@ public class CreatePostFragment extends DialogFragment {
     ImageButton img_btn;
     Button stuffit_btn;
 
+    ImageView preview;
+
     Uri imageUri;
     boolean obo_bool;
     Bitmap bitmap;
+
+    File photoFile;
+    String mCurrentPhotoPath;
+    String image_url;
 
 
     @Override
@@ -97,12 +107,31 @@ public class CreatePostFragment extends DialogFragment {
         cond_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cond_spinner.setAdapter(cond_adapter);
 
+        preview = (ImageView)view.findViewById(R.id.stuff_pic);
+
         img_btn = (ImageButton)view.findViewById(R.id.stuff_pic_button);
         img_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 0);
+
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    // Create the File where the photo should go
+                    photoFile = null;
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException ex) {
+                        // Error occurred while creating the File
+                        Log.e("hey", ex.toString());
+                    }
+                    // Continue only if the File was successfully created
+                    if (photoFile != null) {
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                                Uri.fromFile(photoFile));
+                        startActivityForResult(intent, 0);
+                    }
+                }
             }
         });
 
@@ -135,7 +164,7 @@ public class CreatePostFragment extends DialogFragment {
                     post_json.put("location", loc_spinner.getSelectedItem().toString());
                     post_json.put("condition", cond_spinner.getSelectedItem().toString());
                     post_json.put("obo", obo_bool);
-                    post_json.put("imageUrl", "http://vignette1.wikia.nocookie.net/pokemon/images/6/64/025Pikachu_AG_anime_4.png/revision/latest?cb=20140410200756");
+                    post_json.put("imageUrl", image_url);
                 }catch(Exception e){
                     Log.e("create post", "json error");
                 }
@@ -170,14 +199,40 @@ public class CreatePostFragment extends DialogFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
-        Bitmap bp = (Bitmap) data.getExtras().get("data");
-        img_btn.setImageBitmap(bp);
 
-//        AmazonS3Client s3Client = new AmazonS3Client( new BasicAWSCredentials( MY_ACCESS_KEY_ID, MY_SECRET_KEY ) );
-//        s3Client.createBucket( MY_PICTURE_BUCKET );
-//        PutObjectRequest por = new PutObjectRequest( Constants.getPictureBucket(), Constants.PICTURE_NAME, new java.io.File( filePath) );
-//        s3Client.putObject( por );
+
+
+        new UploadToImgurTask().execute(photoFile);
+        try {
+                JSONObject ret = new UploadToImgurTask().execute(photoFile).get();
+                image_url = ret.getJSONObject("data").getString("link").replace("\\", "");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ImageLoader il = ImageLoader.getInstance();
+        il.displayImage(image_url,preview);
+
     }
 
 
-}
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
+    }
+
+
+  }
