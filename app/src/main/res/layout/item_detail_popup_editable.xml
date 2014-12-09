@@ -45,21 +45,31 @@
 
     <EditText
         android:layout_width="fill_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:text="Title"
         android:id="@+id/item_detail_title_editable"
         android:textSize="35dp"
         android:gravity="bottom"/>
 
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="23dp"
+            android:text="Posted by "
+            android:id="@+id/item_detail_editable_posted_by"
+            android:textSize="18dp"
+            android:gravity="bottom"/>
+
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="200dp"
-        android:id="@+id/item_detail_pic_editable" />
+        android:id="@+id/item_detail_pic_editable"
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Description"
+        android:inputType="textMultiLine"
         android:id="@+id/item_detail_description_editable"
         android:textSize="16dp"
         android:maxHeight="120dp"

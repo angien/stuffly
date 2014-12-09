@@ -45,7 +45,7 @@
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:text="Title"
             android:id="@+id/item_detail_title"
             android:textSize="45dp"
@@ -55,14 +55,15 @@
             android:layout_width="fill_parent"
             android:layout_height="23dp"
             android:text="Posted by "
-            android:id="@+id/item_display_posted_by"
+            android:id="@+id/item_detail_posted_by"
             android:textSize="18dp"
             android:gravity="bottom"/>
 
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="200dp"
-            android:id="@+id/item_detail_pic" />
+            android:id="@+id/item_detail_pic"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:layout_width="fill_parent"
@@ -155,7 +156,7 @@
             android:id="@+id/item_detail_message_button"
             android:background="@drawable/stuffly_color"
             android:src="@drawable/ic_action_chat"
-            android:layout_marginRight="5dp" />
+            android:layout_marginTop="10dp" />
 
         </LinearLayout>
     </ScrollView>

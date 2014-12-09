@@ -30,6 +30,7 @@ public class MyItemsFragment extends Fragment
     private ArrayList<String> text1;
     private ArrayList<String> text2;
     private ArrayList<String> ImageUrls;
+    private ArrayList<String> names;
     private ArrayList<JSONObject> json;
 
     @Override
@@ -38,10 +39,11 @@ public class MyItemsFragment extends Fragment
 
 
         View rootView = inflater.inflate(R.layout.fragment_myitems, container, false);
-        text1 = new ArrayList<String>();
-        text2 = new ArrayList<String>();
-        json = new ArrayList<JSONObject>();
-        ImageUrls = new ArrayList<String>();
+        text1       = new ArrayList<String>();
+        text2       = new ArrayList<String>();
+        json        = new ArrayList<JSONObject>();
+        ImageUrls   = new ArrayList<String>();
+        names       = new ArrayList<String>();
 
         //spinner for choosing my stuff and my bids
         spinner = (Spinner) rootView.findViewById(R.id.myItemSpinner);
@@ -61,7 +63,7 @@ public class MyItemsFragment extends Fragment
 */
         items_list = new ArrayList<String>();
         myItemsListView = (ListView) getActivity().findViewById(R.id.myItemslistView);
-        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2,ImageUrls,json);
+        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, names, ImageUrls,json);
         myItemsListView.setAdapter(arrayAdapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -69,10 +71,11 @@ public class MyItemsFragment extends Fragment
                 Object item = parent.getItemAtPosition(pos);
                 String uid = UserID.id;
 
-                text1 = new ArrayList<String>();
-                text2 = new ArrayList<String>();
-                ImageUrls = new ArrayList<String>();
-                json = new ArrayList<JSONObject>();
+                text1       = new ArrayList<String>();
+                text2       = new ArrayList<String>();
+                ImageUrls   = new ArrayList<String>();
+                json        = new ArrayList<JSONObject>();
+                names       = new ArrayList<String>();
 
                 if (item.toString().equals("My Items")) {
                     try {
@@ -85,6 +88,7 @@ public class MyItemsFragment extends Fragment
                             text2.add(i, postArray.getJSONObject(i).getString("description"));
                             ImageUrls.add(i, postArray.getJSONObject(i).optString("imageUrl", "http://i.imgur.com/RWLVSt0.png"));
                             json.add(i, postArray.getJSONObject(i));
+                            names.add(i, "you");
 
                         }
 
@@ -120,7 +124,7 @@ public class MyItemsFragment extends Fragment
                     }
 
                 }
-                arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, ImageUrls, json);
+                arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, names, ImageUrls, json);
                 myItemsListView.setAdapter(arrayAdapter);
 
 

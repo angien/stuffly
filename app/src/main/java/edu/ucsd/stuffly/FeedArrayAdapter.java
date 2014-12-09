@@ -37,10 +37,11 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
     public ArrayList<JSONObject> feed_json;
     public Image[] feed_imageview_image;
     public ArrayList<String> ImageUrls;
+    public ArrayList<String> names;
     ImageLoader il = ImageLoader.getInstance();
 
 
-    public FeedArrayAdapter(Activity context, ArrayList<String> text1, ArrayList<String> text2, ArrayList<String> ImageUrls, ArrayList<JSONObject> json )//, Image[] image)
+    public FeedArrayAdapter(Activity context, ArrayList<String> text1, ArrayList<String> text2, ArrayList<String> names, ArrayList<String> ImageUrls, ArrayList<JSONObject> json )//, Image[] image)
     {
         super(context, R.layout.cell_feed, text1);
         this.context = context;
@@ -48,6 +49,9 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
         this.feed_textview2_text = text2;
         this.feed_json =json;
         this.ImageUrls = ImageUrls;
+        if(names != null) {
+            this.names = names;
+        }
     }
 
     @Override
@@ -64,6 +68,7 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
                 View root = ((Activity)context).getWindow().getDecorView().findViewById(android.R.id.content);
                 String text;
                 String title = "";
+                String name = "";
                 String description = "";
                 int price = 0;
                 boolean obo = false;
@@ -76,7 +81,10 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
                     Log.e("GET VIEW ID USER", UserID.id);
                     id = feed_json.get(position).getString("_id");
                     poster_id = feed_json.get(position).getString("user");
-                    text = feed_json.get(position).toString();
+                    if(names != null && names.size() > 0) {
+                        name = names.get(position);
+                    }
+                    //text = feed_json.get(position).toString();
                     title = feed_json.get(position).getString("title");
                     description = feed_json.get(position).getString("description");
                     price = feed_json.get(position).getInt("price");
@@ -86,10 +94,10 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
 
                     ItemDetailFragment idf = new ItemDetailFragment();
 
-                    idf.setContent(id,poster_id, title,description, price,obo,location, picURL);
+                    idf.setContent(id,name,poster_id, title,description, price,obo,location, picURL);
 
                     if ((UserID.id).equals(feed_json.get(position).getString("user"))) {
-                        text = "MATCHES!!!";
+                        //text = "MATCHES!!!";
                         idf.setSelf(true);
                     }
                     else {
@@ -98,7 +106,7 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
                     idf.show(((FragmentActivity) context).getSupportFragmentManager(), "itemDetail" + position);
                 }
                 catch (Exception e) {
-                    text = e.toString();
+                    Log.e("FeedArrayAdapter", e.toString());
                 }
                 //int duration = Toast.LENGTH_SHORT;
 

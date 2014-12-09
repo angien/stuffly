@@ -82,7 +82,8 @@
                 android:text="Date"
                 android:id="@+id/message_detail_date"
                 android:layout_marginLeft="10dp"
-                android:textSize="24dp" />
+                android:textSize="24dp"
+                android:scrollHorizontally="true"/>
         </LinearLayout>
 
         <LinearLayout

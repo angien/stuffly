@@ -25,6 +25,7 @@ public class FeedFragment extends Fragment
 
     private ArrayList<String> text1;
     private ArrayList<String> text2;
+    private ArrayList<String> names;
     private ArrayList<String> ImageUrls;
     private ArrayList<JSONObject> json;
 
@@ -35,6 +36,7 @@ public class FeedFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_feed, container, false);
         text1 = new ArrayList<String>();
         text2 = new ArrayList<String>();
+        names = new ArrayList<String>();
         ImageUrls = new ArrayList<String>();
 
         json = new ArrayList<JSONObject>();
@@ -66,14 +68,44 @@ public class FeedFragment extends Fragment
             }
 
 
+
+
+
         }catch(Exception e){
             Log.e("FeedFragment GET", "treat yo self");
         }
 
+        rtaskget = new MyHttpRequests();
+        try{
+            rtaskget.execute("/api/user/","GET");
+            JSONArray feed = new JSONArray(rtaskget.get());
+
+            for(int i = 0; i < json.size(); i++){
+                for(int j = 0; j < feed.length(); j++){
+                    if(UserID.id.equals(feed.getJSONObject(j).getString("_id"))){
+                        Log.e("FeedFragment", "something posted by you");
+                        String name = "you";
+                        names.add(i,name);
+                        break;
+                    }else if(json.get(i).getString("user").equals(feed.getJSONObject(j).getString("_id"))) {
+                        Log.e("FeedFragment", "found a match!");
+                        String name = feed.getJSONObject(j).optString("firstname", "Someone");
+                        if (!name.equals("Someone")) {
+                            name = name + " " + feed.getJSONObject(j).optString("lastname", " ").substring(0, 1);
+                        }
+                        names.add(i, name);
+                        break;
+                    }
+                }
+            }
+        }
+        catch(Exception e) {
+            Log.e("FeedFragment GET", "treat yo self");
+        }
 
         feed_list = new ArrayList<String>();
         listview_feed = (ListView) getActivity().findViewById(R.id.listview_feed);
-        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, ImageUrls, json);
+        arrayAdapter = new FeedArrayAdapter(getActivity(), text1, text2, names, ImageUrls, json);
         listview_feed.setAdapter(arrayAdapter);
 
 //        // allow action when clicking on listview's cell

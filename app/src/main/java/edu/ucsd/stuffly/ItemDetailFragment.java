@@ -52,6 +52,7 @@ import java.util.List;
 public class ItemDetailFragment extends DialogFragment {
     String postId = "";
     String posterId = "";
+    String name = "";
     String title = "";
     String description = "";
     double price = 0;
@@ -82,6 +83,9 @@ public class ItemDetailFragment extends DialogFragment {
 
             TextView titleView = (TextView) view.findViewById(R.id.item_detail_title);
             titleView.setText(title);
+
+            TextView postedByView = (TextView) view.findViewById(R.id.item_detail_posted_by);
+            postedByView.setText("Posted by " + name);
 
             TextView descriptionView = (TextView) view.findViewById(R.id.item_detail_description);
             descriptionView.setText(description);
@@ -156,6 +160,9 @@ public class ItemDetailFragment extends DialogFragment {
 
             final EditText titleEdit = (EditText) view.findViewById(R.id.item_detail_title_editable);
             titleEdit.setText(title);
+
+            TextView postedByView = (TextView) view.findViewById(R.id.item_detail_editable_posted_by);
+            postedByView.setText("Posted by " + name);
 
             final EditText descriptionEdit = (EditText) view.findViewById(R.id.item_detail_description_editable);
             descriptionEdit.setText(description);
@@ -245,9 +252,10 @@ public class ItemDetailFragment extends DialogFragment {
         return OptionDialog;
     }
 
-    public void setContent(String id, String poster_id, String t, String d, double p, boolean o, String l, String u){
+    public void setContent(String id, String n, String poster_id, String t, String d, double p, boolean o, String l, String u){
         postId = id;
         posterId = poster_id;
+        name = n;
         title = t;
         description = d;
         price = p;
