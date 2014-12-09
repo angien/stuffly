@@ -46,7 +46,7 @@ public class MessagesFragment extends Fragment
     {
         MyHttpRequests rtaskget = new MyHttpRequests();
         try{
-            rtaskget.execute("/api/user/" + UserID.getUserId() + "/messages" ,"GET");
+            rtaskget.execute("/api/user/" + UserID.getUserId() + "/messages/received" ,"GET");
             JSONArray feed = new JSONArray(rtaskget.get());
 
             for(int i = 0; i < feed.length(); i++)
