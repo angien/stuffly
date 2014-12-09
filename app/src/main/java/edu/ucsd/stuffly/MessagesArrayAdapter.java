@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +37,9 @@ public class MessagesArrayAdapter extends ArrayAdapter<String> {
     public ArrayList<JSONObject> json_array;
     public Image[] messages_imageview_image;
 
+    ImageView chat_imageview;
+    ImageLoader il = ImageLoader.getInstance();
+    String image_url = "";
 
     public MessagesArrayAdapter(Activity context, ArrayList<String> text1,  ArrayList<String> text2, ArrayList<JSONObject> json )//, Image[] image)
     {
@@ -63,6 +68,7 @@ public class MessagesArrayAdapter extends ArrayAdapter<String> {
                 String date = "";
                 String from_id = "";
                 String from_name = "";
+                image_url = "";
 
                 try {
                     Log.e("GET VIEW ID USER", UserID.id);
@@ -104,6 +110,11 @@ public class MessagesArrayAdapter extends ArrayAdapter<String> {
 
         TextView messages_textview3 = (TextView) rowView.findViewById(R.id.messages_cell_message);
         messages_textview3.setText(this.message_array.get(position));
+
+        image_url = json_array.get(position).optString("imageUrl", "http://i.imgur.com/RWLVSt0.png");
+        chat_imageview = (ImageView)rowView.findViewById(R.id.messages_cell_pic);
+        il.displayImage(image_url, chat_imageview);
+
 
         //ImageView messages_imageview = (ImageView) rowView.findViewById(R.id.messages_imageview);
         //messages_imageview.setImageResource(R.drawable.app_logo);

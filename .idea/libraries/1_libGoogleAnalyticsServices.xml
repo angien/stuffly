@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="1_libGoogleAnalyticsServices">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/Users/Angie/GitHub/stuffly/libraries/libGoogleAnalyticsServices.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libraries/libGoogleAnalyticsServices.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
