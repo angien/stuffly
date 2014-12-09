@@ -74,10 +74,11 @@
                 android:text="$0.00"
                 android:id="@+id/item_detail_price"
                 android:textSize="30dp"
-                android:gravity="center_vertical|right" />
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="20dp"/>
 
             <CheckBox
-                android:layout_width="85dp"
+                android:layout_width="150dp"
                 android:layout_height="35dp"
                 android:text="OBO"
                 android:id="@+id/item_detail_obo"
@@ -85,8 +86,7 @@
                 android:textSize="24dp"
                 android:enabled="true"
                 android:clickable="false"
-                android:layout_marginLeft="50dp"
-                android:gravity="center_vertical" />
+                android:layout_marginLeft="50dp" />
 
         </LinearLayout>
 
