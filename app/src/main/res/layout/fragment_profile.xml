@@ -14,12 +14,17 @@
     android:weightSum="1"
     android:id="@+id/profile">
 
-    <ImageButton
+    <ImageView
         android:layout_width="fill_parent"
         android:layout_height="200dp"
         android:id="@+id/profile_pic"
         android:src="@drawable/man"
         android:layout_gravity="center_horizontal" />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/edit_profile_img_btn"
+        android:text="Take Profile Pic"/>
 
     <EditText
         android:layout_width="match_parent"
