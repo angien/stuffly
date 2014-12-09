@@ -64,9 +64,11 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
                 int price = 0;
                 boolean obo = false;
                 String location = "";
+                String id ="";
 
                 try {
                     Log.e("GET VIEW ID USER", UserID.id);
+                    id = feed_json.get(position).getString("_id");
                     text = feed_json.get(position).toString();
                     title = feed_json.get(position).getString("title");
                     description = feed_json.get(position).getString("description");
@@ -76,7 +78,7 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
 
                     ItemDetailFragment idf = new ItemDetailFragment();
 
-                    idf.setContent(title,description, price,obo,location);
+                    idf.setContent(id,title,description, price,obo,location);
 
                     if ((UserID.id).equals(feed_json.get(position).getString("user"))) {
                         text = "MATCHES!!!";
