@@ -20,10 +20,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ import com.facebook.Session;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.FacebookDialog;
 import com.facebook.widget.WebDialog;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -51,6 +54,7 @@ public class ItemDetailFragment extends DialogFragment {
     String category = "";
     String location = "Off-campus";
     boolean self = false;
+    String picURL = "";
     NumberFormat f = NumberFormat.getCurrencyInstance();
 
     public ItemDetailFragment() {
@@ -61,6 +65,8 @@ public class ItemDetailFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        ImageLoader il = ImageLoader.getInstance();
 
         if(!self) {
             View view = inflater.inflate(R.layout.item_detail_popup, null);
@@ -82,8 +88,10 @@ public class ItemDetailFragment extends DialogFragment {
             TextView locationView = (TextView) view.findViewById(R.id.item_detail_location);
             locationView.setText(location);
 
-            Button shareButton = (Button) view.findViewById(R.id.item_detail_facebook_button);
-            shareButton.setVisibility(View.GONE);
+            ImageView imageView = (ImageView) view.findViewById(R.id.item_detail_pic);
+            il.displayImage(picURL,imageView);
+
+//            Button shareButton = (Button) view.findViewById(R.id.item_detail_facebook_button);
 //            shareButton.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {
@@ -128,12 +136,13 @@ public class ItemDetailFragment extends DialogFragment {
         return OptionDialog;
     }
 
-    public void setContent(String t, String d, double p, boolean o, String l){
+    public void setContent(String t, String d, double p, boolean o, String l, String u){
         title = t;
         description = d;
         price = p;
         obo = o;
         location = l;
+        picURL = u;
     }
 
     public void setSelf(boolean s){

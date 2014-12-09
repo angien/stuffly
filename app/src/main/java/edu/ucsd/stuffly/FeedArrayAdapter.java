@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,17 +35,19 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
     public ArrayList<String> feed_textview1_text;
     public ArrayList<String> feed_textview2_text;
     public ArrayList<JSONObject> feed_json;
-    public Image[] feed_imageview_image;
+    public ArrayList<String> ImageUrls;
+
+    ImageLoader il = ImageLoader.getInstance();
 
 
-    public FeedArrayAdapter(Activity context, ArrayList<String> text1, ArrayList<String> text2, ArrayList<JSONObject> json )//, Image[] image)
+    public FeedArrayAdapter(Activity context, ArrayList<String> text1, ArrayList<String> text2, ArrayList<String> ImageUrls, ArrayList<JSONObject> json )//, Image[] image)
     {
         super(context, R.layout.cell_feed, text1);
         this.context = context;
         this.feed_textview1_text = text1;
         this.feed_textview2_text = text2;
         this.feed_json =json;
-        //this.feed_imageview_image = image;
+        this.ImageUrls = ImageUrls;
     }
 
     @Override
@@ -64,6 +68,7 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
                 int price = 0;
                 boolean obo = false;
                 String location = "";
+                String picURL = "";
 
                 try {
                     Log.e("GET VIEW ID USER", UserID.id);
@@ -73,10 +78,11 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
                     price = feed_json.get(position).getInt("price");
                     obo = feed_json.get(position).getBoolean("obo");
                     location = feed_json.get(position).getString("location");
+                    picURL = (feed_json.get(position).getString("imageUrl") == null ? "" : feed_json.get(position).getString("imageUrl"));
 
                     ItemDetailFragment idf = new ItemDetailFragment();
 
-                    idf.setContent(title,description, price,obo,location);
+                    idf.setContent(title,description, price,obo,location,picURL);
 
                     if ((UserID.id).equals(feed_json.get(position).getString("user"))) {
                         text = "MATCHES!!!";
@@ -98,6 +104,9 @@ public class FeedArrayAdapter extends ArrayAdapter<String>
         });
 
         //int imageId = getContext().getResources().getDrawable(R.id.app_logo);
+
+        //ImageView feed_imageView = (ImageView) rowView.findViewById(R.id.feed_cell_pic);
+        //il.displayImage(this.ImageUrls.get(position),feed_imageView);
 
         TextView feed_textview1 = (TextView) rowView.findViewById(R.id.feed_cell_title);
         feed_textview1.setText(this.feed_textview1_text.get(position));

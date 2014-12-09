@@ -64,6 +64,7 @@ public class MessagesArrayAdapter extends ArrayAdapter<String> {
                 int price = 0;
                 boolean obo = false;
                 String location = "";
+                String picURL = "";
 
                 try {
                     Log.e("GET VIEW ID USER", UserID.id);
@@ -76,7 +77,7 @@ public class MessagesArrayAdapter extends ArrayAdapter<String> {
 
                     ItemDetailFragment idf = new ItemDetailFragment();
 
-                    idf.setContent(title,description, price,obo,location);
+                    idf.setContent(title,description, price,obo,location, picURL);
 
                     if ((UserID.id).equals(messages_json.get(position).getString("user"))) {
                         text = "MATCHES!!!";
