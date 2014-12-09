@@ -212,7 +212,7 @@ public class ItemDetailFragment extends DialogFragment {
                     try{
                         put_json.put("user", UserID.getUserId());
                         put_json.put("title", titleEdit.getText().toString());
-                        put_json.put("imageURL", picURL);
+                        put_json.put("imageUrl", picURL);
                         put_json.put("description", descriptionEdit.getText().toString());
                         put_json.put("price", Double.parseDouble(priceEdit.getText().toString().substring(1)));
                         put_json.put("category", "Electronics");
@@ -224,11 +224,13 @@ public class ItemDetailFragment extends DialogFragment {
                         Log.e("ItemDetailFragment PUT", e.toString());
                     }
 
+                    Log.e("better work ItemDetailFragment PUT", put_json.toString());
+
                     MyHttpRequests a = new MyHttpRequests();
                     a.execute("/api/post/" + postId, "PUT", put_json.toString());
                     try {
                         String ab = a.get();
-                        Log.e("a.get()", ab);
+                        Log.e("item details put a.get()", ab);
 
                     }catch (Exception e){
                         Log.e("error", e.toString());
