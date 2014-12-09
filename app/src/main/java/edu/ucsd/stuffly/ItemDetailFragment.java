@@ -116,7 +116,7 @@ public class ItemDetailFragment extends DialogFragment {
 
             newMessage = (EditText) view.findViewById(R.id.item_detail_message_text);
 
-            Button messageButton = (Button) view.findViewById(R.id.item_detail_message_button);
+            ImageButton messageButton = (ImageButton) view.findViewById(R.id.item_detail_message_button);
             messageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -212,6 +212,7 @@ public class ItemDetailFragment extends DialogFragment {
                     try{
                         put_json.put("user", UserID.getUserId());
                         put_json.put("title", titleEdit.getText().toString());
+                        put_json.put("imageURL", picURL);
                         put_json.put("description", descriptionEdit.getText().toString());
                         put_json.put("price", Double.parseDouble(priceEdit.getText().toString().substring(1)));
                         put_json.put("category", "Electronics");
